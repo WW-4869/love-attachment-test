@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>依恋类型 · 恋爱风格测试｜你在亲密关系里的默认设置</title>
+<meta name="description" content="24 道题，约 4 分钟，测出你在亲密关系里的依恋类型：8 种恋爱模式、焦虑/回避/外显三维分布、相处合拍与易耗类型，完整报告与结果海报全部免费。">
+<style>
+  :root{
+    --bg-0:#0B0710;--bg-1:#140A18;--bg-2:#1C0E1F;
+    --line:rgba(255,255,255,.085);
+    --text:#F3EAF3;--muted:#B9A3B8;--dim:#8A7690;
+    --accent:#FF85A8;--accent-soft:rgba(255,133,168,.14);
+    --radius:20px;
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{background:var(--bg-0);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+  .bg::before{content:"";position:absolute;left:50%;top:-20%;width:780px;height:780px;transform:translateX(-50%);background:radial-gradient(circle,rgba(255,133,168,.18),rgba(255,133,168,0) 62%);filter:blur(6px)}
+  .bg::after{content:"";position:absolute;left:-18%;bottom:-24%;width:660px;height:660px;background:radial-gradient(circle,rgba(142,155,255,.14),rgba(142,155,255,0) 64%)}
+  .grain{position:absolute;inset:0;opacity:.5}
+  .grain i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;animation:twinkle 4.6s ease-in-out infinite}
+  @keyframes twinkle{0%,100%{opacity:.12}50%{opacity:.8}}
+  #app{position:relative;z-index:1;max-width:440px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+  .screen{display:none;flex:1;flex-direction:column;padding:0 22px}
+  .screen.active{display:flex;animation:screenIn .5s cubic-bezier(.22,.9,.3,1)}
+  @keyframes screenIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+  .brand{display:flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:.16em;color:var(--dim);padding-top:max(46px,env(safe-area-inset-top))}
+  .brand span.dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);animation:beat 2.2s ease-in-out infinite}
+  @keyframes beat{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.5);opacity:.5}}
+
+  .hero{flex:1;display:flex;flex-direction:column;justify-content:center;padding:18px 0 20px}
+  .hero h1{font-size:36px;line-height:1.26;font-weight:800;letter-spacing:-.02em;background:linear-gradient(158deg,#FFFFFF 18%,#FFC3D5 62%,#FF85A8 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .hero h1 em{font-style:normal;display:block}
+  .hero .lead{margin-top:15px;font-size:15px;line-height:1.85;color:var(--muted)}
+  .hero .lead strong{color:var(--text);font-weight:600}
+  .grid-preview{margin-top:23px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .mini{display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:13px;background:rgba(255,255,255,.035);border:1px solid var(--line);min-width:0}
+  .mini .mk{flex:0 0 17px;width:17px;height:17px;display:grid;place-items:center}
+  .mini .mk svg{width:100%;height:100%}
+  .mini .mtext{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+  .mini b{font-size:12px;font-weight:600;color:#DCCEDB;letter-spacing:.01em;white-space:nowrap}
+  .mini s{font-size:10px;line-height:1.35;text-decoration:none;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .grid-hint{margin-top:10px;text-align:center;font-size:11.5px;line-height:1.6;color:var(--dim)}
+  .meta{display:flex;align-items:center;justify-content:center;gap:11px;font-size:12.5px;color:var(--dim);margin-bottom:16px;flex-wrap:wrap}
+  .meta i{width:3px;height:3px;border-radius:50%;background:var(--dim)}
+  .cta{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:17px;border:none;border-radius:16px;font-family:var(--font);font-size:16.5px;font-weight:700;color:#1A0A12;background:linear-gradient(135deg,#FFFFFF,#FFD3DF);box-shadow:0 12px 32px -12px rgba(255,133,168,.75);cursor:pointer;transition:transform .18s}
+  .cta:active{transform:scale(.975)}
+  .cta svg{width:16px;height:16px}
+  .foot-note{margin:13px 0 calc(86px + env(safe-area-inset-bottom));text-align:center;font-size:11.5px;color:var(--dim);line-height:1.7}
+
+  #quiz{padding-top:max(18px,env(safe-area-inset-top))}
+  .quiz-top{display:flex;align-items:center;justify-content:space-between;padding:10px 0 16px}
+  .icon-btn{width:36px;height:36px;display:grid;place-items:center;border:none;border-radius:50%;background:rgba(255,255,255,.06);color:var(--muted);cursor:pointer;transition:.18s}
+  .icon-btn:active{background:rgba(255,255,255,.13);transform:scale(.94)}
+  .icon-btn svg{width:16px;height:16px}
+  .progress-count{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .progress-count b{color:var(--text);font-size:15px}
+  /* ===== 答题进度：随进度移动的精致小人（颜色随实时倾向过渡） ===== */
+  .prog-stage{position:relative;margin:2px 0 14px;padding-top:34px}
+  .bar-wrap{position:relative;height:4px;border-radius:4px;background:rgba(255,255,255,.07)}
+  .bar-fill{height:100%;width:0;border-radius:4px;background:linear-gradient(90deg,#FF85A8,#FFC08E);transition:width .45s cubic-bezier(.4,0,.2,1)}
+  .walker{position:absolute;top:-28px;left:0;width:54px;height:54px;margin-left:-27px;display:grid;place-items:center;color:var(--wc,#FF85A8);transition:left .5s cubic-bezier(.4,0,.2,1),color .45s,opacity .3s;z-index:2;will-change:left}
+  .walker.idle{opacity:.45}
+  .walker .halo{position:absolute;inset:3px;border-radius:50%;border:1px solid currentColor;opacity:.3;animation:haloPulse 2.6s ease-in-out infinite}
+  @keyframes haloPulse{0%,100%{opacity:.22;transform:scale(1)}50%{opacity:.55;transform:scale(1.12)}}
+  .walker .avatar{position:relative;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 34% 26%,rgba(255,255,255,.16),rgba(18,9,22,.94) 60%);border:1.5px solid currentColor;box-shadow:0 8px 20px -10px currentColor,0 0 0 4px rgba(255,255,255,.03);transition:box-shadow .45s}
+  .walker .avatar>svg{width:31px;height:37px}
+  .walker .wmark{position:absolute;right:-4px;top:-5px;width:19px;height:19px;border-radius:50%;display:grid;place-items:center;background:#150B19;border:1px solid currentColor;box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 10px -2px currentColor;transition:opacity .35s,transform .35s}
+  .walker .wmark svg{width:11px;height:11px}
+  .walker .wmark.empty{opacity:0;transform:scale(.6)}
+  .walker.pop .avatar{animation:walkerPop .52s cubic-bezier(.22,1.4,.4,1)}
+  @keyframes walkerPop{0%{transform:scale(.72)}55%{transform:scale(1.13)}100%{transform:scale(1)}}
+  /* 精致小人：身体轻浮 + 四肢走路摆动（仅用 transform，保持 60fps） */
+  .walker .figure{transform-box:fill-box;transform-origin:50% 96%;animation:figBob 1.5s ease-in-out infinite}
+  @keyframes figBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}
+  .walker .p-arm,.walker .p-leg{transform-box:fill-box}
+  .walker .p-arm{transform-origin:50% 8%}
+  .walker .p-arm.l{animation:armSwingL 1.5s ease-in-out infinite}
+  .walker .p-arm.r{animation:armSwingR 1.5s ease-in-out infinite}
+  @keyframes armSwingL{0%,100%{transform:rotate(13deg)}50%{transform:rotate(-11deg)}}
+  @keyframes armSwingR{0%,100%{transform:rotate(-13deg)}50%{transform:rotate(11deg)}}
+  .walker .p-leg{transform-origin:50% 4%}
+  .walker .p-leg.l{animation:legStepL 1.5s ease-in-out infinite}
+  .walker .p-leg.r{animation:legStepR 1.5s ease-in-out infinite}
+  @keyframes legStepL{0%,100%{transform:rotate(9deg)}50%{transform:rotate(-9deg)}}
+  @keyframes legStepR{0%,100%{transform:rotate(-9deg)}50%{transform:rotate(9deg)}}
+  @media (prefers-reduced-motion:reduce){.walker .halo,.walker .figure,.walker .p-arm,.walker .p-leg{animation:none!important}}
+  .q-index{font-size:12px;letter-spacing:.16em;color:var(--dim);margin-bottom:11px}
+  .q-title{font-size:23px;line-height:1.5;font-weight:700;letter-spacing:-.01em;margin-bottom:26px;min-height:69px}
+  .options{display:flex;flex-direction:column;gap:10px;padding-bottom:104px}
+  .quiz-foot{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:100%;max-width:440px;padding:14px 22px calc(16px + env(safe-area-inset-bottom));display:flex;align-items:center;z-index:2;background:linear-gradient(to top,rgba(11,7,16,.97) 34%,rgba(11,7,16,.66) 72%,rgba(11,7,16,0));pointer-events:none}
+  .prev-btn{pointer-events:auto;display:inline-flex;align-items:center;gap:7px;padding:11px 17px;border-radius:100px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.055);backdrop-filter:blur(10px);color:var(--muted);font-family:var(--font);font-size:13px;cursor:pointer;transition:transform .16s,background .18s,opacity .2s}
+  .prev-btn:active{transform:scale(.97);background:rgba(255,255,255,.11)}
+  .prev-btn:disabled{opacity:.3;pointer-events:none}
+  .prev-btn svg{width:13px;height:13px}
+  .opt{display:flex;align-items:center;gap:13px;text-align:left;padding:16px 17px;border-radius:16px;cursor:pointer;background:rgba(255,255,255,.045);border:1px solid var(--line);color:var(--text);font-family:var(--font);font-size:15.5px;line-height:1.5;transition:background .18s,border-color .18s,transform .14s}
+  .opt:active{transform:scale(.98)}
+  .opt .radio{flex:0 0 19px;width:19px;height:19px;border-radius:50%;border:1.5px solid rgba(255,255,255,.26);transition:.18s}
+  .opt.chosen{background:var(--accent-soft);border-color:var(--accent)}
+  .opt.chosen .radio{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 3.5px var(--accent-soft)}
+
+  #analyzing{justify-content:center;align-items:center;text-align:center}
+  .scan{position:relative;width:160px;height:160px;margin-bottom:36px;display:grid;place-items:center}
+  .scan .ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(255,133,168,.28);animation:pulse 2.6s ease-out infinite}
+  .scan .ring:nth-child(2){animation-delay:.87s}
+  .scan .ring:nth-child(3){animation-delay:1.74s}
+  @keyframes pulse{0%{transform:scale(.5);opacity:0}30%{opacity:.85}100%{transform:scale(1);opacity:0}}
+  .scan .sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(255,133,168,.26),rgba(255,133,168,0) 32%,rgba(255,133,168,0));animation:spin 3.4s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .scan .core{position:relative;width:62px;height:62px;display:grid;place-items:center;color:#FFD3DF}
+  .scan .core svg{width:34px;height:34px;animation:beat 1.3s ease-in-out infinite}
+  .scan-text{font-size:16px;color:var(--muted);letter-spacing:.04em;min-height:24px}
+  .scan-hint{margin-top:12px;font-size:12.5px;color:var(--dim)}
+
+  #result{padding-top:max(24px,env(safe-area-inset-top));padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+  .reveal-badge{display:inline-flex;align-items:center;gap:7px;align-self:center;padding:7px 14px;border-radius:100px;margin-bottom:18px;font-size:11.5px;letter-spacing:.16em;color:var(--accent);background:var(--accent-soft);border:1px solid rgba(255,255,255,.12)}
+  .reveal-badge svg{width:13px;height:13px}
+  .emblem-wrap{position:relative;display:flex;justify-content:center;margin-bottom:6px}
+  .emblem-wrap::before{content:"";position:absolute;top:50%;left:50%;width:168px;height:168px;margin:-84px 0 0 -84px;border-radius:50%;background:radial-gradient(circle,var(--accent-soft) 0%,rgba(255,133,168,0) 72%);filter:blur(10px);opacity:.55;pointer-events:none}
+  .emblem{position:relative;width:132px;height:132px;filter:drop-shadow(0 12px 30px var(--glow));z-index:1}
+  .emblem svg{width:100%;height:100%;color:var(--accent)}
+  .emblem.enter{animation:emblemIn .85s cubic-bezier(.18,1.3,.36,1) both}
+  @keyframes emblemIn{0%{transform:scale(.45) rotate(-10deg);opacity:0}60%{transform:scale(1.06) rotate(2deg);opacity:1}100%{transform:none;opacity:1}}
+  .emblem.tap::after{content:"";position:absolute;left:50%;top:50%;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;border:2px solid var(--accent);animation:ripple .8s ease-out forwards}
+  @keyframes ripple{0%{transform:scale(.55);opacity:.85}100%{transform:scale(2.7);opacity:0}}
+  .type-name{display:flex;align-items:center;justify-content:center;gap:10px;text-align:center;font-size:33px;font-weight:800;letter-spacing:.02em}
+  .type-sym{flex:0 0 34px;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;color:var(--accent);background:linear-gradient(145deg,var(--accent-soft),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 4px 12px -5px var(--accent);align-self:center;margin-top:3px;transition:transform .35s cubic-bezier(.22,1.3,.36,1)}
+  .type-sym:hover{transform:scale(1.08) rotate(-4deg)}
+  .type-sym svg{width:19px;height:19px}
+  .type-alias{text-align:center;margin-top:7px;font-size:13.5px;color:var(--accent);letter-spacing:.06em}
+  .tagline{text-align:center;margin:15px auto 0;max-width:330px;font-size:16.5px;line-height:1.7;color:#F0E2EE}
+  .family-note{text-align:center;margin:14px auto 26px;max-width:340px;font-size:12.5px;line-height:1.7;color:var(--dim)}
+
+  .panel{background:rgba(255,255,255,.038);border:1px solid var(--line);border-radius:var(--radius);padding:19px 18px;margin-bottom:13px}
+  .panel-title{display:flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:.14em;color:var(--dim);margin-bottom:15px}
+  .panel-title::before{content:"";width:3px;height:12px;border-radius:2px;background:var(--accent);opacity:.8}
+  /* ===== 结果页 Bento 核心区（2 列栅格，卡片错落） ===== */
+  .bento{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+  .b-card{position:relative;min-width:0;padding:15px 15px 16px;border-radius:18px;background:rgba(255,255,255,.042);border:1px solid var(--line)}
+  .b-card.span2,.bento .praise-card{grid-column:span 2}
+  .b-card.rel-card{margin-bottom:12px;padding:15px 0 14px}
+  .b-card.rel-card>.b-head,.b-card.rel-card>.hs-title,.b-card.rel-card>.rel-note{margin-left:15px;margin-right:15px}
+  .b-head{display:flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.13em;color:var(--dim);margin-bottom:11px}
+  .b-head::before{content:"";width:3px;height:10px;border-radius:2px;background:var(--accent);opacity:.8}
+  /* 三维分布：一排三张迷你指标卡 */
+  .mrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .mcard{position:relative;padding:11px 11px 12px;border-radius:14px;background:rgba(255,255,255,.045);border:1px solid var(--line)}
+  .mcard .mlab{display:block;font-size:10.5px;letter-spacing:.06em;color:var(--dim)}
+  .mcard .mval{display:block;margin-top:4px;font-size:19px;font-weight:800;letter-spacing:-.02em;color:var(--text);font-variant-numeric:tabular-nums}
+  .mcard .mtag{position:absolute;top:9px;right:9px;font-size:9.5px;padding:2px 6px;border-radius:100px;color:var(--dim);background:rgba(255,255,255,.06)}
+  .mcard .mtag.hi{color:var(--accent);background:var(--accent-soft)}
+  .mcard .mbar{display:block;margin-top:9px;height:4px;border-radius:4px;background:rgba(255,255,255,.08);overflow:hidden}
+  .mcard .mbar i{display:block;height:100%;width:0;border-radius:4px;background:linear-gradient(90deg,var(--accent),#FFD3A8);transition:width .7s cubic-bezier(.2,.8,.2,1)}
+  .dim-note{margin-top:13px;font-size:11.5px;line-height:1.7;color:var(--dim)}
+  /* ===== 闪光点高亮卡（渐变描边） ===== */
+  .praise-card{position:relative;padding:17px 17px 16px;border-radius:18px;border:1px solid transparent;background:linear-gradient(rgba(28,14,31,.92),rgba(28,14,31,.92)) padding-box,linear-gradient(140deg,var(--accent),rgba(255,255,255,.14) 55%,rgba(255,255,255,.05)) border-box}
+  .praise-card .pc-tag{display:inline-flex;align-items:center;gap:6px;margin-bottom:9px;font-size:11px;letter-spacing:.14em;color:var(--accent)}
+  .praise-card .pc-tag::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)}
+  .praise-card p{font-size:14.5px;line-height:1.85;color:#F2E7F0}
+  /* 关键数据紧凑格 */
+  .bstats{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .bstat{padding:8px 9px;border-radius:11px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+  .bstat b{display:block;font-size:13px;font-weight:700;line-height:1.35;color:var(--text)}
+  .bstat span{display:block;margin-top:3px;font-size:9.5px;letter-spacing:.02em;color:var(--dim)}
+  /* 同家族类型竖排（可点按查看详情） */
+  .bfam{display:flex;flex-direction:column;gap:7px}
+  .b-card.fam-card{display:flex;flex-direction:column}
+  .b-card.fam-card .bfam{flex:1;justify-content:center}
+  .bfam .chip{display:block;width:100%;text-align:center;cursor:pointer;transition:border-color .2s,background .2s,color .2s}
+  .bfam .chip:active{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.26)}
+  .fam-hint{display:block;margin-top:5px;font-size:10px;letter-spacing:.03em;color:var(--dim);text-align:center}
+  /* ===== 关系搭配：均分网格（全部完整展示，不截断） ===== */
+  .hs-title{display:flex;align-items:center;gap:7px;font-size:11.5px;letter-spacing:.06em;color:var(--muted);margin:0 0 8px}
+  .hs-title.t2{margin-top:14px}
+  .hs-title .pair-count{margin-left:auto}
+  .pair-dot.red{background:#FF8C78;box-shadow:0 0 8px rgba(255,140,120,.5)}
+  .hs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0;padding:0 15px 2px}
+  .hs-card{min-width:0;padding:12px 12px 13px;border-radius:15px;background:rgba(255,255,255,.05);border:1px solid var(--line);cursor:pointer;transition:transform .16s,border-color .2s,background .2s}
+  .hs-card:active{transform:scale(.985)}
+  .hs-card.good{border-color:rgba(79,224,184,.26);background:rgba(79,224,184,.055)}
+  .hs-card.bad{border-color:rgba(255,140,120,.24);background:rgba(255,140,120,.05)}
+  .hs-sym{width:26px;height:26px;border-radius:9px;display:grid;place-items:center;color:#8FF0D2;background:linear-gradient(145deg,rgba(79,224,184,.16),rgba(255,255,255,.02));border:1px solid rgba(79,224,184,.3);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+  .hs-card.bad .hs-sym{color:#FFB1A3;background:linear-gradient(145deg,rgba(255,140,120,.16),rgba(255,255,255,.02));border-color:rgba(255,140,120,.3)}
+  .hs-sym svg{width:15px;height:15px}
+  .hs-card b{display:block;margin-top:9px;font-size:13px;font-weight:600;color:var(--text)}
+  .hs-card i{display:block;margin-top:2px;font-size:10.5px;font-style:normal;color:var(--dim)}
+  .hs-card p{margin-top:8px;font-size:11.5px;line-height:1.65;color:var(--muted)}
+  /* ===== 可折叠长文分区（手风琴） ===== */
+  .acc{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.038);margin-bottom:11px;overflow:hidden;transition:border-color .3s}
+  .acc.open{border-color:rgba(255,255,255,.16)}
+  .acc-h{display:flex;align-items:center;gap:10px;padding:15px 16px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .18s}
+  .acc-h:active{background:rgba(255,255,255,.035)}
+  .acc-ico{flex:0 0 28px;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;color:var(--accent);background:var(--accent-soft);border:1px solid rgba(255,255,255,.1)}
+  .acc-ico svg{width:15px;height:15px}
+  .acc-h b{flex:1;font-size:13.5px;font-weight:600;letter-spacing:.03em;color:var(--text)}
+  .acc-arrow{flex:0 0 16px;color:var(--dim);transition:transform .35s cubic-bezier(.4,0,.2,1)}
+  .acc-arrow svg{width:14px;height:14px;display:block}
+  .acc.open .acc-arrow{transform:rotate(180deg);color:var(--accent)}
+  .acc-b{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1)}
+  .acc-in{padding:2px 16px 16px}
+  /* 窄屏：Bento 退化为单列，避免小卡内文字挤压 */
+  @media (max-width:380px){
+    .bento{grid-template-columns:1fr}
+    .b-card.span2,.bento .praise-card{grid-column:span 1}
+    .mcard .mval{font-size:17px}
+  }
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{padding:7px 11px;border-radius:100px;font-size:12px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--muted)}
+  .chip.good{color:#8FF0D2;border-color:rgba(79,224,184,.34);background:rgba(79,224,184,.1)}
+  .chip.bad{color:#FFB1A3;border-color:rgba(255,140,120,.3);background:rgba(255,140,120,.09)}
+  .chip.on{color:var(--text);border-color:var(--accent);background:var(--accent-soft)}
+  .rel-note{margin:9px 0 16px;font-size:12.5px;line-height:1.8;color:var(--muted)}
+  .rel-note:last-child{margin-bottom:0}
+  /* ===== 关系搭配列表 ===== */
+  .pair-group{margin-bottom:15px}
+  .pair-group:last-child{margin-bottom:0}
+  .pair-title{display:flex;align-items:center;gap:7px;font-size:12px;letter-spacing:.05em;color:var(--muted);margin-bottom:4px}
+  .pair-dot{width:7px;height:7px;border-radius:50%;background:#4FE0B8;box-shadow:0 0 8px rgba(79,224,184,.5)}
+  .pair-group.bad .pair-dot{background:#FF8C78;box-shadow:0 0 8px rgba(255,140,120,.5)}
+  .pair-count{font-size:10.5px;color:var(--dim);padding:1px 7px;border-radius:100px;background:rgba(255,255,255,.05)}
+  .pair-row{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-top:1px dashed rgba(255,255,255,.07)}
+  .pair-row:first-of-type{border-top:none}
+  .pair-sym{flex:0 0 24px;width:24px;height:24px;border-radius:8px;display:grid;place-items:center;color:#8FF0D2;background:rgba(255,255,255,.05);border:1px solid rgba(79,224,184,.3)}
+  .pair-group.bad .pair-sym{color:#FFB1A3;border-color:rgba(255,140,120,.28)}
+  .pair-sym svg{width:14px;height:14px}
+  .pair-main{flex:1;min-width:0}
+  .pair-main b{font-size:13px;font-weight:600;color:var(--text)}
+  .pair-main i{font-style:normal;font-size:11px;color:var(--dim);margin-left:6px}
+  .pair-why{display:block;margin-top:3px;font-size:11.5px;line-height:1.65;color:var(--muted)}
+  /* ===== 长久关系提醒 ===== */
+  .warn-intro{margin-bottom:15px;padding:10px 12px;border-radius:12px;font-size:12.5px;line-height:1.8;color:var(--muted);background:rgba(255,255,255,.04);border-left:2px solid var(--accent)}
+  .warn-sub{display:flex;align-items:center;gap:6px;margin:0 0 9px;font-size:11.5px;letter-spacing:.08em;color:#8FF0D2}
+  .warn-sub.risk{margin-top:16px;color:#FFB067}
+  .warn-sub::before{content:"";width:3px;height:10px;border-radius:2px;background:currentColor}
+  .warn-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .warn-list li{position:relative;padding-left:20px;font-size:13px;line-height:1.8;color:#E4D5E2}
+  .warn-list.keep li::before{content:"✓";position:absolute;left:0;top:0;font-size:11.5px;color:#4FE0B8}
+  .warn-list.risk li::before{content:"!";position:absolute;left:1px;top:2px;width:13px;height:13px;line-height:13px;text-align:center;font-size:10px;font-weight:700;color:#FFB067;border:1px solid rgba(255,176,103,.5);border-radius:50%}
+  /* ===== 行动清单 ===== */
+  .actions{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .actions li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;line-height:1.8;color:#E4D5E2}
+  .act-n{flex:0 0 21px;width:21px;height:21px;margin-top:2px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-soft);border:1px solid rgba(255,255,255,.12)}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .stat{padding:11px 12px;border-radius:13px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+  .stat b{display:block;font-size:15.5px;font-weight:700;color:var(--text)}
+  .stat span{display:block;margin-top:4px;font-size:11px;color:var(--dim);letter-spacing:.04em}
+  .sec{margin-bottom:17px}
+  .sec:last-child{margin-bottom:0}
+  .sec h3{margin-bottom:7px;font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--accent)}
+  .sec p{font-size:14px;line-height:1.95;color:#E4D5E2}
+  .sec ul{list-style:none}
+  .sec li{position:relative;padding-left:19px;margin-bottom:9px;font-size:14px;line-height:1.8;color:#E4D5E2}
+  .sec li::before{content:"";position:absolute;left:2px;top:9px;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.7}
+
+  .result-actions{display:flex;gap:10px;margin-top:20px}
+  .ghost-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:15px 10px;border-radius:15px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:var(--text);font-family:var(--font);font-size:14px;font-weight:600;cursor:pointer;transition:transform .16s,background .18s}
+  .ghost-btn:active{transform:scale(.975);background:rgba(255,255,255,.1)}
+  .ghost-btn svg{width:15px;height:15px}
+  .ghost-btn.primary{border-color:rgba(255,133,168,.42);background:var(--accent-soft);color:#FFD8E3}
+  .copy-btn{width:100%;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:7px;padding:13px;border-radius:14px;border:1px dashed rgba(255,255,255,.16);background:transparent;color:var(--muted);font-family:var(--font);font-size:12.5px;cursor:pointer}
+  .copy-btn:active{background:rgba(255,255,255,.05)}
+  .copy-btn svg{flex:0 0 14px;width:14px;height:14px}
+  .disclaimer{margin-top:18px;font-size:11.5px;line-height:1.75;color:var(--dim);text-align:center}
+
+  .music-btn{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:3;width:42px;height:42px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.10);border-radius:50%;background:rgba(20,10,24,.72);backdrop-filter:blur(10px);color:var(--muted);cursor:pointer}
+  .music-btn svg{width:17px;height:17px}
+  .music-btn .ico-on{display:none}
+  .music-btn.on{color:#FFD3DF;border-color:rgba(255,133,168,.4)}
+  .music-btn.on .ico-on{display:block}
+  .music-btn.on .ico-off{display:none}
+
+  /* ===== 徽章：每种类型一套专属循环动作（仅用 transform / opacity，稳定 60fps） ===== */
+  .emblem svg g.glyph{transform-origin:60px 60px}
+  .a-sun .sun-rays{animation:spin 22s linear infinite}
+  .a-sun .sun-core{animation:sunPulse 3.6s ease-in-out infinite;transform-origin:60px 60px}
+  .a-tree .tree-top{animation:sway 4.6s ease-in-out infinite;transform-origin:60px 68px}
+  .a-tree .tree-leaf{animation:leaf 3.8s ease-in-out infinite}
+  .a-radar .radar-sweep{animation:spin 3.2s linear infinite}
+  .a-radar .radar-blip{animation:blip 3.2s ease-in-out infinite}
+  .a-flame .flame-outer{animation:flick 2.6s ease-in-out infinite;transform-origin:60px 84px}
+  .a-flame .flame-inner{animation:flick 1.9s ease-in-out infinite .2s;transform-origin:60px 84px}
+  .a-kite .kite-body{animation:swing 4.2s ease-in-out infinite;transform-origin:60px 28px}
+  .a-kite .kite-tail{animation:tailWave 2.8s ease-in-out infinite}
+  .a-sub .sub-body{animation:bob 4s ease-in-out infinite}
+  .a-sub .sub-bubble{animation:rise 3.4s ease-out infinite}
+  .a-heart .ecg-line{stroke-dasharray:16 12;animation:dash 1.6s linear infinite}
+  .a-heart .heart-body{animation:beat 2.4s ease-in-out infinite;transform-origin:60px 58px}
+  .a-dome .dome-glow{animation:shine 4s ease-in-out infinite}
+  .a-dome .dome-heart{animation:float 3.6s ease-in-out infinite}
+  @keyframes sunPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+  @keyframes sway{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
+  @keyframes leaf{0%,100%{transform:translateY(0);opacity:.55}50%{transform:translateY(-3px);opacity:.95}}
+  @keyframes blip{0%,72%{opacity:.15}78%,88%{opacity:1}100%{opacity:.15}}
+  @keyframes flick{0%,100%{transform:scale(1,1)}35%{transform:scale(.94,1.06)}70%{transform:scale(1.04,.96)}}
+  @keyframes swing{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+  @keyframes tailWave{0%,100%{transform:translateX(-2px) rotate(-3deg)}50%{transform:translateX(2px) rotate(3deg)}}
+  @keyframes bob{0%,100%{transform:translateY(2px)}50%{transform:translateY(-4px)}}
+  @keyframes rise{0%{transform:translateY(0);opacity:0}25%{opacity:.7}100%{transform:translateY(-16px);opacity:0}}
+  @keyframes dash{to{stroke-dashoffset:-28}}
+  @keyframes shine{0%,100%{opacity:.15}50%{opacity:.6}}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+  /* ===== 类型详情弹窗 ===== */
+  .type-modal{position:fixed;inset:0;z-index:8;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(8,4,12,.74);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+  .type-modal.show{display:flex;animation:tmFade .22s ease}
+  @keyframes tmFade{from{opacity:0}to{opacity:1}}
+  .tm-panel{position:relative;width:100%;max-width:430px;max-height:84vh;overflow-y:auto;overscroll-behavior:contain;padding:22px 20px 24px;border-radius:22px;background:linear-gradient(160deg,#1B0F20,#130A17);border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 70px -22px rgba(0,0,0,.85);animation:tmIn .3s cubic-bezier(.22,1.1,.36,1)}
+  @keyframes tmIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+  .tm-close{position:absolute;right:12px;top:12px;width:32px;height:32px;display:grid;place-items:center;border:none;border-radius:50%;background:rgba(255,255,255,.07);color:var(--muted);cursor:pointer;transition:.18s}
+  .tm-close:active{background:rgba(255,255,255,.16);transform:scale(.93)}
+  .tm-close svg{width:14px;height:14px}
+  .tm-head{display:flex;align-items:center;gap:11px;padding-right:38px}
+  .tm-sym{flex:0 0 40px;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.14)}
+  .tm-sym svg{width:21px;height:21px}
+  .tm-name{font-size:22px;font-weight:800;letter-spacing:.01em;color:var(--text);line-height:1.25}
+  .tm-alias{margin-top:3px;font-size:12px;letter-spacing:.04em;color:var(--tm-c)}
+  .tm-fam{display:inline-flex;align-items:center;margin-top:11px;padding:4px 10px;border-radius:100px;font-size:10.5px;line-height:1.5;color:var(--dim);background:rgba(255,255,255,.05);border:1px solid var(--line)}
+  .tm-tagline{margin-top:14px;font-size:14.5px;line-height:1.75;color:#F2E7F0}
+  .tm-praise{margin-top:14px;padding:12px 13px;border-radius:14px;background:rgba(255,255,255,.045);border:1px solid var(--line)}
+  .tm-praise span{display:block;margin-bottom:6px;font-size:10.5px;letter-spacing:.12em;color:var(--tm-c)}
+  .tm-praise p{font-size:13px;line-height:1.8;color:#E9DBE7}
+  .tm-stats{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+  .tm-stat{padding:8px 9px;border-radius:11px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+  .tm-stat b{display:block;font-size:12.5px;font-weight:700;line-height:1.35;color:var(--text)}
+  .tm-stat span{display:block;margin-top:3px;font-size:9.5px;color:var(--dim)}
+  .tm-sec{margin-top:16px}
+  .tm-sec h4{margin-bottom:6px;font-size:12.5px;font-weight:600;letter-spacing:.03em;color:var(--tm-c)}
+  .tm-sec p{font-size:13px;line-height:1.85;color:#E4D5E2}
+
+  /* 窄屏：关系搭配退为两列，第三张通栏，保证文字不被压窄 */
+  @media (max-width:400px){
+    .hs{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .hs-card:last-child{grid-column:1/-1}
+  }
+  /* 宽屏（桌面/大平板）：内容区放宽，避免中间窄栏 + 两侧大片空白 */
+  @media (min-width:600px){
+    #app{max-width:800px}
+    .screen{padding-left:32px;padding-right:32px}
+    .quiz-foot{max-width:800px;padding-left:32px;padding-right:32px}
+    .hero h1{font-size:46px}
+    .hero .lead{font-size:16px;max-width:560px}
+    .grid-preview{grid-template-columns:repeat(4,1fr)}
+    .mini b{font-size:13px}
+    .tagline{max-width:540px}
+    .family-note{max-width:580px}
+    .tm-panel{max-width:520px}
+    .music-btn{right:max(16px,calc(50vw - 384px))}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .emblem svg g.glyph *,.scan .sweep,.scan .core svg,.brand span.dot{animation:none!important}
+  }
+</style>
+</head>
+<body>
+<div class="bg"><div class="grain" id="grain"></div></div>
+<div id="app"></div>
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()" aria-label="开启背景音乐" title="背景音乐：关闭" aria-pressed="false">
+  <svg class="ico-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M16.5 9.5l4 5M20.5 9.5l-4 5"/></svg>
+  <svg class="ico-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 6a9 9 0 0 1 0 12"/></svg>
+</button>
+
+<div class="type-modal" id="typeModal" aria-hidden="true" onclick="if(event.target===this)closeType()">
+  <div class="tm-panel" role="dialog" aria-modal="true" aria-labelledby="tmName" onclick="event.stopPropagation()">
+    <button class="tm-close" onclick="closeType()" aria-label="关闭详情">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+    </button>
+    <div id="typeModalBody"></div>
+  </div>
+</div>
+
+<script>
+/* ===================== 数据层 ===================== */
+var FAMILIES=[
+  {name:'安全型家族',tag:'稳',desc:'在亲密里既敢靠近，也不怕分开',color:'#4FE0B8'},
+  {name:'焦虑型家族',tag:'追',desc:'爱得很用力，也怕得很快',color:'#FF85A8'},
+  {name:'回避型家族',tag:'退',desc:'靠自己是本能，靠近是练习',color:'#8E9BFF'},
+  {name:'恐惧型家族',tag:'拉',desc:'想要亲密，又怕亲密带来的失控',color:'#FFB067'}
+];
+
+/* 每种类型的固定结构：名称 / 别名 / 一句话 / 闪光点 / 4 个数据 / 4 段解析 / 4 条建议 */
+var TYPES=[
+{n:'恒温型',a:'人形小太阳',t:'你爱得稳，也敢说出口。',f:0,icon:'sun',anim:'a-sun',
+ st:[['秒回概率','85%'],['冷战能撑','2 小时'],['说“想你”','很经常'],['独处充电','每天 1 小时']],
+ praise:'你身上有一种让人放松的能力：不用试探，也能感觉到自己被喜欢。你把“喜欢”说得出口，也接得住对方的情绪，这在亲密关系里是很稀缺的能力。',
+ sec:[
+  ['你在恋爱里的默认设置','你相信关系是可以沟通的。他晚回消息，你会想“他大概在忙”，而不是“他不要我了”；你难受的时候倾向说出来，而不是憋着等对方猜。你喜欢一个人，会让对方知道。'],
+  ['这套模式从哪来','大概率来自你早期被稳定回应的经验——哭了有人哄，说“不”也有人接住。久而久之你内化了一个信念：我的需要是合理的，关系是安全的，表达不会带来惩罚。'],
+  ['最容易卡住的地方','你的“稳定”有时会让对方误以为你不需要被照顾；你也容易低估对方的敏感，把“这有什么好难过”说出口。另外，你可能会不自觉地去“修”对方，替他把情绪问题解决掉。'],
+  ['可以怎么调整','允许自己偶尔不成熟。他不安的时候，先接情绪再讲道理；也别把“我能搞定”当成唯一正确的生活方式，被人照顾一次不会让你掉价。']
+ ],
+ act:['每周留一次“只聊感受、不解决问题”的对话','直接说出你需要的照顾，而不是等对方主动','对方沉默时先问：“你想被陪着，还是想自己待会儿？”','别急着给建议，先确认他只是想被听见']},
+
+{n:'靠山型',a:'安静的靠山',t:'你不常说爱，但你一直在。',f:0,icon:'tree',anim:'a-tree',
+ st:[['主动说想你','很少'],['吵架后破冰','等对方先'],['记住细节','超强'],['情绪外露','30%']],
+ praise:'你的爱是“可被依靠”的那种：不喧哗，但对方一回头，你就在。你记得住他不吃香菜、记得他哪天有面试，这种被人放在心上的感觉，比一百句情话都稳。',
+ sec:[
+  ['你在恋爱里的默认设置','你更习惯用做事表达在意：提前把伞放进他包里，记得他随口提过的小事。但“我喜欢你”这四个字，你可能一年也说不出几回。你觉得爱是做出来的，不是讲出来的。'],
+  ['这套模式从哪来','你可能成长在一个“爱但不说”的环境，或者早年表达情绪被敷衍过，于是学会了“做比说安全”。你也可能不太习惯成为被关注的中心。'],
+  ['最容易卡住的地方','对方可能长期感受不到被明确选择——你以为的“他应该知道”，在对方那里是“我是不是想多了”。你的沉默不是冷淡，但在他那里很难分辨。'],
+  ['可以怎么调整','把行动翻译成一句话：“今天给你带了伞，因为我怕你淋雨。”同一件事，加上一句解释，感受就完全不同了。']
+ ],
+ act:['每天一句具体的肯定，不说“挺好”，说“你刚才那个想法我很喜欢”','对方问“你爱不爱我”时，别用玩笑带过','用文字留下证据：一条语音、一张便签、一句晚安','允许自己在关系里“显得需要人”']},
+
+{n:'雷达型',a:'秒回小雷达',t:'你一直在扫描：他还爱我吗？',f:1,icon:'radar',anim:'a-radar',
+ st:[['秒回概率','99%'],['冷战能撑','40 分钟'],['脑补分手','每天 3 次'],['情绪说出口','70%']],
+ praise:'你的爱浓度很高，能让人清楚地感觉到“被在乎”。你对关系的敏锐，常常先一步发现裂缝，也常常是那个主动把问题摊开来谈的人。',
+ sec:[
+  ['你在恋爱里的默认设置','消息三小时不回，你已经把最坏的结果演了三遍；他一冷淡，你会立刻加码靠近——多发几条、多问几句、多想一点。你需要明确的回应，才能确认关系还在。'],
+  ['这套模式从哪来','焦虑型依恋常来自“忽冷忽热”的养育或早期关系经验：你学会了“关系要用力抓，才不会被拿走”。你的雷达不是想太多，而是曾经真的失去过。'],
+  ['最容易卡住的地方','你的靠近会让对方有压力，对方的退让又验证了你的恐惧，于是形成“追—逃”循环：你越确认，越不安；他越退，你越追。'],
+  ['可以怎么调整','把“确认”从对方身上收回一部分：先给情绪命名（“我现在是慌，不是事实”），再决定要不要发那条消息。你会发现，很多危机只发生在你脑子里。']
+ ],
+ act:['消息发出去后，先做一件 20 分钟能做完的事','把“你是不是不爱我了”换成“我现在有点慌，能抱一下吗”','建立不依赖伴侣的情绪出口：朋友、运动、写日记','记录一次“我担心的事没有发生”，给自己攒证据']},
+
+{n:'闷烧型',a:'内耗小火山',t:'你什么都不说，但什么都记得。',f:1,icon:'flame',anim:'a-flame',
+ st:[['情绪外露','15%'],['内心戏时长','一整晚'],['主动提需求','很少'],['删改消息','每天 5 次']],
+ praise:'你体贴、细致，能记住对方所有微小的变化。你的在意从不敷衍，只是常常在心里完成了全部表达——你是那种“爱得很满、却不太会喊疼”的人。',
+ sec:[
+  ['你在恋爱里的默认设置','你很少发作，但会在心里反复回放；你打了一大段话，删到只剩“嗯，你忙”。你希望他能自己发现，因为“要来的关心不算关心”。'],
+  ['这套模式从哪来','你可能很早就学过“表达需求会被嫌麻烦”，于是把情绪转为内耗——这样至少不会被拒绝。沉默成了你的保护色，也成了你的委屈。'],
+  ['最容易卡住的地方','对方永远在猜；你的委屈以“突然冷淡”的形式出现，对方只觉得莫名其妙。关系不是吵散的，是在一次次没说出口里慢慢耗尽的。'],
+  ['可以怎么调整','练习“低风险表达”：先说事实和感受，不指责、不追问结论。说“我有点难过”比说“你根本不在乎我”更容易被接住。']
+ ],
+ act:['用“我句式”：“你昨天没回我，我有点不安。”句号，不加问号','设一个 24 小时规则：憋超过一天就必须说','把删掉的那段话，发给信任的朋友，而不是只给自己看','允许自己有一次“说得不够好”的表达']},
+
+{n:'风筝型',a:'一靠近就想飞',t:'亲密到某个刻度，你就想松手。',f:2,icon:'kite',anim:'a-kite',
+ st:[['需要独处','每天 4 小时'],['被表白后','想跑'],['情绪外露','40%'],['主动示弱','几乎没有']],
+ praise:'你独立、有趣、有自己的世界。和你在一起不无聊，也不会被吞没——你能给对方一种“我们是两个完整的人在一起”的关系质感。',
+ sec:[
+  ['你在恋爱里的默认设置','关系一旦变认真，你会突然想确认“我还能不能随时走”；对方的浓烈情绪，你会用玩笑化解。你不是不爱，你只是需要保留一扇能出去的门。'],
+  ['这套模式从哪来','回避型依恋常源自“靠自己最安全”的早期经验——求助没被回应，于是不再求助。你把独立练成了本能，也把需要藏了起来。'],
+  ['最容易卡住的地方','你的撤退被读成“不在乎”，对方的追问让你更想跑；你把自由和亲密设成了对立面，好像靠近就一定意味着失去自己。'],
+  ['可以怎么调整','撤退前先说一句：“我需要一点时间，不是要离开你。”同一件事，两种结局。你可以既有空间，也被人知道你在。']
+ ],
+ act:['把“我需要空间”说成一句完整的话，而不是直接消失','每周固定一次“不被打扰的亲密时间”，让靠近有边界','观察自己逃跑的触发点：是“被要求”，还是“被看见”','允许对方照顾你一次，不急着还人情']},
+
+{n:'潜水艇型',a:'情绪下潜',t:'一有情绪，你就沉下去。',f:2,icon:'sub',anim:'a-sub',
+ st:[['吵架后消失','约 24 小时'],['情绪外露','10%'],['主动谈感受','极少'],['内心翻涌度','很高']],
+ praise:'你沉稳、不添乱，是很多人眼里“最省心的伴侣”。你的深情藏在细节里：不吵不闹，但会把事情默默处理好，把对方的生活照顾得妥帖。',
+ sec:[
+  ['你在恋爱里的默认设置','不舒服的时候，你不吵不闹，只是安静下来；你以为“等一等就好了”，但情绪被压进了更深处。你习惯自己消化，把需求降到最低。'],
+  ['这套模式从哪来','你可能很早就学会“情绪是麻烦”，于是用沉默保护关系，也保护自己。下潜不是冷漠，是你唯一学会的止损方式。'],
+  ['最容易卡住的地方','对方不知道发生了什么，只能感到冷；长期的“没事”最后会变成“算了”。你躲过了当下的冲突，却积攒了更大的距离。'],
+  ['可以怎么调整','给沉默加一句说明书：“我现在说不好，明天晚上我们聊聊。”让对方知道你在，只是需要缓一下——这比消失有用得多。']
+ ],
+ act:['每次下潜前，发一条“我在，只是需要缓一下”','设一个固定的“关系复盘”时间，每周 20 分钟','用写的代替说的，把难开口的话先写下来','分清“我需要空间”和“我在逃避”，后者要回来']},
+
+{n:'过山车型',a:'又推又拉',t:'你要亲密，又怕亲密。',f:3,icon:'heart',anim:'a-heart',
+ st:[['一天情绪反转','约 3 次'],['主动拉近','很频繁'],['主动推开','也频繁'],['关系稳定度','波动']],
+ praise:'你的感受力极强，爱得用力也爱得真。你能瞬间读懂气氛，也愿意为关系付出——你只是还没学会，在不失控的前提下被爱。',
+ sec:[
+  ['你在恋爱里的默认设置','你可以今天黏到不行，明天突然说“我们是不是太快了”。你渴望被爱，又害怕被爱之后的失控：怕对方走，也怕自己陷太深。'],
+  ['这套模式从哪来','恐惧型依恋通常是“靠近会受伤、离开也受伤”的经验叠加：你既想要，又不信。于是你先推开，至少主动权在自己手里。'],
+  ['最容易卡住的地方','对方被你的反复耗到不敢靠近；你的测试（作、冷、提分手）本质是在问“你会不会走”。可每次测试，都在真的把人推远一点。'],
+  ['可以怎么调整','把测试换成直说：“我刚刚推开你，是因为我怕你先走。”被看见的脆弱，比被猜中的试探更有力量。']
+ ],
+ act:['情绪上头时，先延迟 30 分钟再做任何决定','把“我们分手吧”换成“我现在很怕，你先别走”','记录触发点：是什么让你突然想跑','和对方约定一个“拉扯时暂停”的安全词']},
+
+{n:'玻璃罩型',a:'想被爱，又不敢开门',t:'你想被看见，又怕被看穿。',f:3,icon:'dome',anim:'a-dome',
+ st:[['被靠近时','想躲'],['情绪外露','20%'],['主动求助','几乎不'],['暗中观察','很多']],
+ praise:'你温柔、细腻，共情力强。你给别人的理解，往往正是自己最想要的那种——你非常懂“被好好对待”是什么样子，只是不太敢要。',
+ sec:[
+  ['你在恋爱里的默认设置','你很想被爱，但有人真的走近时，你会先找他的缺点，或先替自己找好退路。你在玻璃罩里看着外面，既期待有人敲门，又怕他真的进来。'],
+  ['这套模式从哪来','你可能经历过“表达了就被否定、靠近了就被离开”，于是学会：不靠近，就不会受伤。防御让你安全，也让你孤单。'],
+  ['最容易卡住的地方','你把人挡在门外，又怪没人进来；关系停在“差一点”的地方反复重来。你不是不想，你是不敢先伸手。'],
+  ['可以怎么调整','每次想撤退时，试着多留 10 分钟，把真实的一句话说出来。你会发现，被看见没有想象中那么危险。']
+ ],
+ act:['每周做一件“暴露脆弱”的小事：说一次“我今天不太好”','对方示好时，先说“谢谢，我很开心”，别急着解释','把“他肯定不喜欢我”写下来，再写三条反证','允许关系有不确定，不必提前预演结局']}
+];
+/* 相处关系：契合 3 种 / 较易消耗 3 种，i 为 TYPES 索引，w 为一句相处理由 */
+var BEST=[
+[{i:1,w:'一个会说，一个会做，刚好补上'},{i:4,w:'你给得起空间，也接得住他回来'},{i:2,w:'你的确定感，能稳住他的慌'}],
+[{i:0,w:'一个会做，一个会说，刚好补上'},{i:7,w:'你不催促，他只对你开门'},{i:5,w:'都不喧哗，但彼此都在'}],
+[{i:0,w:'他稳，你才敢慢慢把雷达松开'},{i:1,w:'他不常说话，但从不失约'},{i:7,w:'都怕被丢下，更能互相体谅'}],
+[{i:1,w:'你不用说，他也记得'},{i:0,w:'他会先问你，而不是让你猜'},{i:2,w:'同一种敏感，能读懂彼此的暗示'}],
+[{i:0,w:'他不追，你就不用逃'},{i:7,w:'都慢热，节奏刚好'},{i:5,w:'互不打扰，也不彼此索取'}],
+[{i:1,w:'安静的人，最懂安静'},{i:0,w:'他会主动，但不逼你开口'},{i:4,w:'都给得起空间，不查岗'}],
+[{i:0,w:'你反复时，他站在原地'},{i:1,w:'你试探时，他用行动回答'},{i:3,w:'都情绪浓，也都不轻易走'}],
+[{i:0,w:'他敲门，但不硬闯'},{i:1,w:'他不说爱，但一直在门口'},{i:3,w:'都怕被看穿，也都不忍伤害'}]
+];
+var WORST=[
+[{i:6,w:'你越稳，他越想测试你'},{i:5,w:'你把话摊开，他只会更沉'},{i:3,w:'你等他说，他等你问'}],
+[{i:2,w:'你的少言，会被读成冷淡'},{i:6,w:'他反复试探，你只会更沉默'},{i:3,w:'他越追问，你越退后'}],
+[{i:5,w:'你追一步，他沉一寸'},{i:4,w:'你越靠近，他越想飞'},{i:6,w:'两个不安，互相点火'}],
+[{i:5,w:'两个沉默，把关系耗空'},{i:4,w:'你憋着，他干脆走开'},{i:7,w:'都在心里演完一出戏'}],
+[{i:3,w:'他要确认，你要呼吸'},{i:2,w:'你退一步，他追十步'},{i:6,w:'一个想逃，一个想绑'}],
+[{i:3,w:'谁都下潜，没人上浮'},{i:2,w:'他的追问，让你更想消失'},{i:6,w:'冷与热来回拉锯'}],
+[{i:5,w:'你越拉，他越沉'},{i:4,w:'你要靠近，他要自由'},{i:2,w:'两个不安，互相点火'}],
+[{i:2,w:'他的高频，让你想关门'},{i:6,w:'互相试探，谁都不先给'},{i:5,w:'都把话咽回去'}]
+];
+
+/* 长久关系提醒：每种类型 4 条注意事项 + 4 个容易犯的错 */
+var NOTES=[
+['你的稳定也会被读成「不需要」，别把自己的需要藏起来','被照顾一次不会掉价，允许自己偶尔依赖','分歧不必每次都讲赢，关系比正确更重要','稳定不是不吵架，是吵完还愿意走回来'],
+['你的爱做得多、说得少，记得给行动配一句说明','对方的不安不是不信任，是在等你确认','接受照顾不必立刻还人情，被爱也可以只是被爱','别把「我一个人也行」当成不需要的证明'],
+['你的敏感是天赋，但别让它替事实下结论','确认要有额度，连续追问会把对方推远','对方的沉默有很多种原因，别默认是最坏的那种','危机多数先发生在脑子里，先缓十分钟再行动'],
+['你的体贴不该以委屈自己为代价','「要来的关心不算关心」是错觉，开口本身就是被爱的开始','别用突然冷淡当提示，对方读不懂','长期内耗会变成怨，怨最后会变成距离'],
+['自由和亲密不是对立面，你可以两样都要','留一句话再撤退，别让对方把空间读成抛弃','别用玩笑躲开对方的认真，那会伤到他','想跑的冲动是模式，不是你的人格缺陷'],
+['情绪可以不解释，但不能不告知','对方感到的冷，往往比你想的更重','「没事」说多了，会变成真的「算了」','空间用来缓一缓，不用来把问题藏起来'],
+['你的反复是在问「你会不会走」，试着把问题直接问出来','试探会把真的在乎的人推远，省着用','被看见的脆弱，比被猜中的试探更有力量','稳定不是没波动，是波动之后还愿意回来'],
+['你想被看见，但得先允许别人看见一点点','被夸、被示好时，先接住，别急着自我否定','「他肯定不喜欢我」是猜测，不是事实','别把「先退一步」当成唯一的安全感来源']
+];
+var TRAPS=[
+['替对方做决定，把「为你好」当成爱','用理性压过情绪，让对方觉得「说了也没用」','把「我能搞定」挂在嘴边，拒绝了被照顾的机会','低估对方的敏感，说出「这有什么好难过」'],
+['对方问「你爱不爱我」时用玩笑带过','把情绪都收好，最后一次性爆发','用做事代替沟通，问题一直没被说开','觉得「他应该知道」，把期待当成了共识'],
+['用「你是不是不爱我了」开场，把对方逼进防御','靠删好友、提分手来测试他会不会留','把他的每一次延迟回复都当成危险信号','为了留住关系，不断降低自己的底线'],
+['删掉打好的大段话，只回一个「嗯」','把不满攒成一次大爆发','用沉默惩罚对方，却说「我没事」','等对方自己发现，等不到就更委屈'],
+['关系一认真就想找出口','用玩笑化解对方的认真表达','用忙碌和失联来降温','把「我一个人也行」说成拒绝'],
+['一不舒服就彻底消失','用「没事」结束所有对话','把冲突拖到不了了之','让对方长期处在「不知道发生了什么」里'],
+['用推开对方来验证他会不会回来','情绪上头时提分手、删好友','把「我不配」当成事实，而不是感觉','反复自我否定，又反复索取确认'],
+['有人靠近就立刻找他的缺点','用「我早就知道」提前给关系判死刑','把求助说成「不用了，我可以」','在门外等，却怪没有人进来']
+];
+
+/* 24 题：s = [依恋焦虑, 依恋回避, 情感外显] 的计分权重 */
+var QUESTIONS=[
+{q:'他三个小时没回你消息，你会？',o:[
+ {t:'该干嘛干嘛，晚点再看',s:[1,2,1]},
+ {t:'会瞄一眼手机，但不催',s:[2,2,1]},
+ {t:'反复点开对话框，猜他怎么了',s:[4,2,2]},
+ {t:'已经想到“他是不是要冷淡我了”',s:[4,1,3]}]},
+{q:'关系开始变认真，你的第一反应是？',o:[
+ {t:'挺开心，顺势往前走',s:[1,1,2]},
+ {t:'开心，但想慢一点',s:[2,2,2]},
+ {t:'有点想退一步，先看看',s:[2,4,1]},
+ {t:'突然觉得“要不还是算了”',s:[3,4,1]}]},
+{q:'喜欢一个人时，你会？',o:[
+ {t:'直接说，让他知道',s:[1,1,4]},
+ {t:'用行动表示，很少说',s:[1,2,1]},
+ {t:'暗示，等他先开口',s:[2,2,2]},
+ {t:'观察很久，再决定要不要表示',s:[2,2,1]}]},
+{q:'他发了朋友圈，却没回你的消息？',o:[
+ {t:'没在意，可能没看到',s:[1,2,1]},
+ {t:'有点在意，但不追问',s:[2,3,1]},
+ {t:'点进去看他发了什么',s:[4,3,2]},
+ {t:'截图给朋友，一起分析',s:[4,2,3]}]},
+{q:'他说“我们聊聊未来吧”，你会？',o:[
+ {t:'愿意聊，把自己的想法说清楚',s:[1,1,3]},
+ {t:'能聊，但不想定得太死',s:[2,2,2]},
+ {t:'转移话题：“顺其自然吧”',s:[2,4,2]},
+ {t:'心里发紧，想尽快结束这段对话',s:[3,4,1]}]},
+{q:'收到礼物、被他照顾时，你的表达是？',o:[
+ {t:'当场夸张地开心，让他看见',s:[2,1,4]},
+ {t:'认真道谢，记在心里',s:[1,2,2]},
+ {t:'嘴上说“不用这么麻烦”',s:[1,3,1]},
+ {t:'心里很感动，表面很平静',s:[2,3,1]}]},
+{q:'你们两个分开一周（放假或异地），你会？',o:[
+ {t:'各过各的，见面再补回来',s:[1,3,1]},
+ {t:'每天聊几句就够',s:[2,3,2]},
+ {t:'想知道他每天都在干嘛',s:[4,1,3]},
+ {t:'因为他没主动找你而睡不好',s:[4,1,1]}]},
+{q:'你理想的相处频率是？',o:[
+ {t:'天天见面也不腻',s:[2,1,3]},
+ {t:'一周几次，节奏刚好',s:[1,2,2]},
+ {t:'保持各自空间，别太黏',s:[1,4,2]},
+ {t:'别总问我在干嘛就行',s:[2,4,1]}]},
+{q:'吵架的时候，你的表达方式是？',o:[
+ {t:'当场把话说透',s:[3,1,4]},
+ {t:'会吵，但会收着',s:[2,2,2]},
+ {t:'沉默，脸色先变',s:[3,3,1]},
+ {t:'先离开现场，之后再谈',s:[2,4,1]}]},
+{q:'他心情不好，却说“没事”，你会？',o:[
+ {t:'尊重他，等他想说',s:[1,3,1]},
+ {t:'问一次，他不说就先放着',s:[2,3,2]},
+ {t:'一直问，直到他开口',s:[4,2,3]},
+ {t:'开始怀疑是不是自己惹的',s:[4,2,1]}]},
+{q:'他情绪很浓（哭、表白、说“我好想你”），你会？',o:[
+ {t:'接住他，也回应他',s:[1,1,3]},
+ {t:'会回应，但有点手足无措',s:[2,2,2]},
+ {t:'下意识岔开，讲个笑话',s:[2,4,2]},
+ {t:'想逃，觉得压力很大',s:[3,4,1]}]},
+{q:'想他的时候，你会？',o:[
+ {t:'直接发“想你了”',s:[1,1,4]},
+ {t:'找个由头聊两句',s:[2,2,2]},
+ {t:'刷他主页，但什么都不说',s:[2,2,1]},
+ {t:'忙起来，让自己别想',s:[1,3,1]}]},
+{q:'他夸了别人一句，你的反应是？',o:[
+ {t:'没什么感觉',s:[1,3,2]},
+ {t:'心里记一下，看他后续',s:[2,3,1]},
+ {t:'当场半开玩笑地酸一句',s:[3,2,3]},
+ {t:'回家反复琢磨，情绪低落',s:[4,2,1]}]},
+{q:'你会主动说自己的脆弱吗？',o:[
+ {t:'会说，因为信任对方',s:[1,1,3]},
+ {t:'挑着说，看情况',s:[2,2,2]},
+ {t:'很少说，都自己消化',s:[2,4,1]},
+ {t:'说出口就后悔，想收回来',s:[3,4,2]}]},
+{q:'朋友问“你是不是喜欢他”，你会？',o:[
+ {t:'大方承认',s:[2,1,4]},
+ {t:'笑着说“有一点吧”',s:[2,2,2]},
+ {t:'立刻否认',s:[2,3,1]},
+ {t:'转移话题',s:[1,3,1]}]},
+{q:'吵架后他没有先低头，你会？',o:[
+ {t:'各过各的，隔天自然翻篇',s:[1,3,1]},
+ {t:'等一等，最多主动一次',s:[2,3,2]},
+ {t:'忍不住先去讲和，怕关系变冷',s:[4,1,3]},
+ {t:'表面不理，心里一直在等',s:[4,2,1]}]},
+{q:'关系让你不舒服时，你更可能？',o:[
+ {t:'直接说清楚',s:[1,1,3]},
+ {t:'委婉提一下',s:[2,2,2]},
+ {t:'冷处理，等他自己发现',s:[2,4,1]},
+ {t:'慢慢淡出，不告而别',s:[3,4,1]}]},
+{q:'你希望他怎么知道你生气了？',o:[
+ {t:'我直接告诉他',s:[2,1,4]},
+ {t:'他能自己看出来',s:[2,2,2]},
+ {t:'希望他自觉，别让我说',s:[2,3,1]},
+ {t:'一般不说，自己消化',s:[2,4,1]}]},
+{q:'你最害怕哪种情况？',o:[
+ {t:'两个人慢慢没话说',s:[2,3,1]},
+ {t:'他忙起来就忽略我',s:[4,2,2]},
+ {t:'他对我失去兴趣',s:[4,2,1]},
+ {t:'我太依赖他，变得不像自己',s:[3,1,2]}]},
+{q:'别人问“你们是什么关系”，你会？',o:[
+ {t:'大方介绍',s:[1,1,2]},
+ {t:'正常回答',s:[1,2,2]},
+ {t:'含糊带过',s:[2,4,1]},
+ {t:'有点抵触，觉得被绑住了',s:[3,4,1]}]},
+{q:'深夜他还没回你最后一条消息，你会？',o:[
+ {t:'先睡，明天再说',s:[1,3,1]},
+ {t:'睡前再看一眼手机',s:[2,3,1]},
+ {t:'躺着想他是不是在跟别人聊',s:[4,2,1]},
+ {t:'想发“你是不是不想理我了”',s:[4,1,3]}]},
+{q:'单身的时候，你更接近？',o:[
+ {t:'挺期待恋爱',s:[3,2,2]},
+ {t:'有最好，没有也行',s:[1,3,2]},
+ {t:'一个人待着挺舒服',s:[1,4,1]},
+ {t:'想谈，又怕麻烦',s:[3,3,1]}]},
+{q:'关系里，你最舒服的表达是？',o:[
+ {t:'每天都说喜欢',s:[1,1,4]},
+ {t:'偶尔一次认真的告白',s:[1,2,3]},
+ {t:'不用说，做出来',s:[1,3,1]},
+ {t:'各自明白就好',s:[1,3,1]}]},
+{q:'在他面前，你更像？',o:[
+ {t:'话很多，什么都想分享',s:[2,1,4]},
+ {t:'分场合，看心情',s:[1,2,2]},
+ {t:'安静，主要听他说',s:[1,3,1]},
+ {t:'话不多，但会一直照顾他',s:[1,3,1]}]}
+];
+
+/* ===================== 徽章图形（8 种专属形象 + 专属循环动作） ===================== */
+var ICONS={
+ sun:'<g class="glyph"><circle class="sun-core" cx="60" cy="60" r="17" fill="currentColor" fill-opacity=".16"/><circle class="sun-core" cx="60" cy="60" r="17" fill="none" stroke="currentColor" stroke-width="2.2"/><g class="sun-rays" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="84" y1="60" x2="92" y2="60"/><line x1="77" y1="43" x2="82.6" y2="37.4"/><line x1="60" y1="36" x2="60" y2="28"/><line x1="43" y1="43" x2="37.4" y2="37.4"/><line x1="36" y1="60" x2="28" y2="60"/><line x1="43" y1="77" x2="37.4" y2="82.6"/><line x1="60" y1="84" x2="60" y2="92"/><line x1="77" y1="77" x2="82.6" y2="82.6"/></g><circle cx="54" cy="58" r="2.4" fill="currentColor"/><circle cx="66" cy="58" r="2.4" fill="currentColor"/><path d="M55 65 q5 5 10 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></g>',
+ tree:'<g class="glyph"><rect x="56" y="62" width="8" height="26" rx="3.5" fill="currentColor" fill-opacity=".45"/><g class="tree-top"><circle cx="60" cy="41" r="16" fill="currentColor" fill-opacity=".16" stroke="currentColor" stroke-width="2"/><circle cx="46" cy="53" r="12" fill="currentColor" fill-opacity=".12" stroke="currentColor" stroke-width="2"/><circle cx="74" cy="53" r="12" fill="currentColor" fill-opacity=".12" stroke="currentColor" stroke-width="2"/></g><g class="tree-leaf" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"><path d="M38 66 q-6 3 -9 8"/><path d="M82 66 q6 3 9 8"/></g><path d="M50 88 h20" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/></g>',
+ radar:'<g class="glyph"><circle cx="60" cy="60" r="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-opacity=".5"/><circle cx="60" cy="60" r="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-opacity=".33"/><circle cx="60" cy="60" r="38" fill="none" stroke="currentColor" stroke-width="1.4" stroke-opacity=".2"/><g class="radar-sweep"><path d="M60 60 L60 22 A38 38 0 0 1 88 39 Z" fill="currentColor" fill-opacity=".2"/><line x1="60" y1="60" x2="60" y2="24" stroke="currentColor" stroke-width="2"/></g><circle class="radar-blip" cx="79" cy="43" r="3.4" fill="currentColor"/><path d="M56 57 q4 -5 8 0 q-4 6 -8 0z" fill="currentColor" fill-opacity=".8"/></g>',
+ flame:'<g class="glyph"><g class="flame-outer"><path d="M60 30 q13 13 13 25 a13 13 0 0 1 -26 0 q0 -8 6 -15 q2 7 7 9 q3 -10 0 -19z" fill="currentColor" fill-opacity=".2" stroke="currentColor" stroke-width="2"/></g><g class="flame-inner"><path d="M60 54 q6 8 6 14 a6 6 0 0 1 -12 0 q0 -8 6 -14z" fill="currentColor" fill-opacity=".55"/></g><path d="M52 84 h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55"/><circle cx="42" cy="70" r="2" fill="currentColor" opacity=".5"/><circle cx="80" cy="66" r="1.6" fill="currentColor" opacity=".4"/></g>',
+ kite:'<g class="glyph"><g class="kite-body"><path d="M60 26 L84 56 L60 90 L36 56 Z" fill="currentColor" fill-opacity=".15" stroke="currentColor" stroke-width="2"/><line x1="60" y1="26" x2="60" y2="90" stroke="currentColor" stroke-width="1.4" stroke-opacity=".55"/><line x1="36" y1="56" x2="84" y2="56" stroke="currentColor" stroke-width="1.4" stroke-opacity=".55"/><circle cx="60" cy="56" r="3" fill="currentColor" fill-opacity=".7"/></g><path class="kite-tail" d="M60 90 q-8 9 2 15 q9 6 1 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-opacity=".7" stroke-linecap="round"/></g>',
+ sub:'<g class="glyph"><g class="sub-body"><ellipse cx="57" cy="66" rx="27" ry="14" fill="currentColor" fill-opacity=".16" stroke="currentColor" stroke-width="2"/><rect x="48" y="47" width="18" height="10" rx="4" fill="currentColor" fill-opacity=".25" stroke="currentColor" stroke-width="1.8"/><path d="M57 47 V38 h9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="47" cy="66" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="60" cy="66" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="73" cy="66" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M84 60 q6 6 0 12" fill="none" stroke="currentColor" stroke-width="1.8"/></g><g class="sub-bubble"><circle cx="86" cy="44" r="3" fill="none" stroke="currentColor" stroke-width="1.3" opacity=".7"/><circle cx="92" cy="34" r="2" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".5"/></g></g>',
+ heart:'<g class="glyph"><g class="heart-body"><path d="M60 82 C48 72 34 62 34 48 C34 39 41 33 49 33 C54 33 58 36 60 40 C62 36 66 33 71 33 C79 33 86 39 86 48 C86 62 72 72 60 82 Z" fill="currentColor" fill-opacity=".16" stroke="currentColor" stroke-width="2"/></g><path class="ecg-line" d="M22 58 h16 l5 -10 l6 20 l6 -14 l4 4 h37" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></g>',
+ dome:'<g class="glyph"><path d="M34 80 A26 26 0 0 1 86 80" fill="currentColor" fill-opacity=".1" stroke="currentColor" stroke-width="2"/><path d="M28 80 h64" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path class="dome-glow" d="M44 74 L54 46" stroke="currentColor" stroke-width="5" stroke-linecap="round" opacity=".25"/><g class="dome-heart"><path d="M60 72 c-7 -5 -11 -9 -11 -15 c0 -4 3 -7 6.5 -7 c2.4 0 4 1.4 4.5 3 c.5 -1.6 2.1 -3 4.5 -3 c3.5 0 6.5 3 6.5 7 c0 6 -4 10 -11 15z" fill="currentColor" fill-opacity=".85"/></g><circle cx="60" cy="80" r="3" fill="currentColor" opacity=".5"/></g>'
+};
+
+/* 每种恋爱风格的专属标识符号（24×24 小图形，浅色填充底+主色描边，与大图徽 ICONS 设计语言一致） */
+var MARKS={
+ sun:'<circle cx="12" cy="12" r="4" fill="currentColor" fill-opacity=".18" stroke="currentColor"/><g stroke="currentColor"><path d="M12 3v2.6M12 18.4V21M3 12h2.6M18.4 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8"/></g><circle cx="10.6" cy="11.3" r=".6" fill="currentColor" stroke="none"/><circle cx="13.4" cy="11.3" r=".6" fill="currentColor" stroke="none"/><path d="M10.5 13.4 q1.5 1.6 3 0" stroke="currentColor" fill="none"/>',
+ tree:'<path d="M12 4 L5.5 13.5 H18.5 Z" fill="currentColor" fill-opacity=".16" stroke="currentColor"/><path d="M12 8 L9 12.5 h6 Z" fill="currentColor" fill-opacity=".24" stroke="currentColor"/><rect x="11" y="13.5" width="2" height="5" rx="1" fill="currentColor" fill-opacity=".4" stroke="currentColor"/><path d="M7.5 18.5 h9" stroke="currentColor" opacity=".5"/>',
+ radar:'<circle cx="12" cy="12.5" r="7.2" fill="none" stroke="currentColor" opacity=".3"/><circle cx="12" cy="12.5" r="4.5" fill="none" stroke="currentColor" opacity=".45"/><path d="M12 12.5 L12 5.3 A7.2 7.2 0 0 1 17.5 8.2 Z" fill="currentColor" fill-opacity=".18" stroke="none"/><line x1="12" y1="5.3" x2="12" y2="12.5" stroke="currentColor"/><circle cx="15.8" cy="9.4" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="12.5" r="1.2" fill="currentColor" stroke="none"/>',
+ flame:'<path d="M12 3.5 q4.8 4.4 4.8 9 a4.8 4.8 0 1 1 -9.6 0 q0 -3.3 2.9 -5.5 q1 2.3 2 3.3 q.9 -3.3 -.1 -6.8z" fill="currentColor" fill-opacity=".16" stroke="currentColor"/><path d="M12 8.5 q2.6 2.6 2.6 5.2 a2.6 2.6 0 1 1 -5.2 0 q0 -3 2.6 -5.2z" fill="currentColor" fill-opacity=".5" stroke="none"/><path d="M8 16.5 h8" stroke="currentColor" opacity=".45"/>',
+ kite:'<path d="M12 3 L19.5 10.5 L12 18 L4.5 10.5 Z" fill="currentColor" fill-opacity=".16" stroke="currentColor"/><line x1="12" y1="3" x2="12" y2="18" stroke="currentColor" opacity=".4"/><line x1="4.5" y1="10.5" x2="19.5" y2="10.5" stroke="currentColor" opacity=".4"/><circle cx="12" cy="10.5" r="1.1" fill="currentColor" stroke="none"/><path d="M12 18 q-2.5 2.2 -1 4.5" stroke="currentColor" fill="none"/><path d="M11 20.5 q2 .8 1 3" stroke="currentColor" fill="none"/>',
+ sub:'<ellipse cx="10.5" cy="14" rx="7" ry="3.6" fill="currentColor" fill-opacity=".16" stroke="currentColor"/><rect x="8" y="9.5" width="5" height="3" rx="1.4" fill="currentColor" fill-opacity=".22" stroke="currentColor"/><path d="M10.5 9.5 V7 h2.4" stroke="currentColor" fill="none"/><circle cx="8.5" cy="14" r="1" fill="none" stroke="currentColor"/><circle cx="11" cy="14" r="1" fill="none" stroke="currentColor"/><circle cx="13.5" cy="14" r="1" fill="none" stroke="currentColor"/><path d="M17.5 12.5 q1.8 1.5 0 3" stroke="currentColor" fill="none"/><circle cx="18.5" cy="9" r=".8" fill="none" stroke="currentColor" opacity=".6"/><circle cx="20" cy="7" r=".6" fill="none" stroke="currentColor" opacity=".4"/>',
+ heart:'<path d="M12 20.5 C7.5 17 3.5 14 3.5 10.2 C3.5 7.6 5.6 6 7.8 6 c1.8 0 3.1 1 4.2 2.4 c1.1 -1.4 2.4 -2.4 4.2 -2.4 c2.2 0 4.3 1.6 4.3 4.2 c0 3.8 -4 6.8 -8.5 10.3z" fill="currentColor" fill-opacity=".16" stroke="currentColor"/><path d="M4 12.5 H7 L8.5 9.5 L11 15 L13 11 L14.5 12.5 H20" stroke="currentColor" fill="none" stroke-width="1.4"/>',
+ dome:'<path d="M5.5 16 A6.5 6.5 0 0 1 18.5 16" fill="currentColor" fill-opacity=".1" stroke="currentColor"/><path d="M3 16.5 h18" stroke="currentColor" stroke-width="1.8"/><path d="M8 15 L11 8" stroke="currentColor" stroke-width="3" opacity=".18" stroke-linecap="round"/><path d="M12 15 C9 13 7 11.3 7 8.5 C7 6.8 8.3 5.8 9.6 5.8 c1 0 1.7.5 2.1 1.2 c.4 -.7 1.1 -1.2 2.1 -1.2 c1.3 0 2.6 1 2.6 2.7 c0 2.8 -2 4.5 -5.2 6.7z" fill="currentColor" fill-opacity=".85" stroke="none"/>'
+};
+function markSVG(icon){
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">'+MARKS[icon]+'</svg>';
+}
+
+/* ===================== 评分 ===================== */
+/* 评分基准：以随机作答的总体分布为参照，把原始总分映射成 0–1 的相对位置，
+   使「50%」大致等于人群中间水平，避免各维度题量差异造成的偏斜 */
+var DIM_MEAN=[50.46,57.75,43.90], DIM_SD=[4.24,4.71,4.62], DIM_SPAN=2.6;
+/* 判定阈值（相对位置 0–1），经随机作答分布校准，保证 8 种类型都可达 */
+var CUT_A=0.5, CUT_V=0.5, CUT_E=0.5;
+
+function compute(sel){
+  var s=[0,0,0];
+  sel.forEach(function(a,i){
+    var w=QUESTIONS[i].o[a].s;
+    for(var k=0;k<3;k++) s[k]+=w[k];
+  });
+  var n=[];
+  for(var k=0;k<3;k++) n.push(Math.max(0,Math.min(1,0.5+(s[k]-DIM_MEAN[k])/(DIM_SPAN*DIM_SD[k]))));
+  var fam = n[1]<CUT_V ? (n[0]<CUT_A?0:1) : (n[0]<CUT_A?2:3);
+  var sub = n[2]>=CUT_E ? 0 : 1;
+  return {p:n, fam:fam, idx:fam*2+sub};
+}
+
+/* ===================== 页面骨架 ===================== */
+var PREVIEW='';
+TYPES.forEach(function(t,i){
+  var c=FAMILIES[t.f].color;
+  PREVIEW+='<div class="mini"><span class="mk" style="color:'+c+'">'+markSVG(t.icon)+'</span><span class="mtext"><b>'+t.n+'</b><s>'+t.a+'</s></span></div>';
+});
+
+document.getElementById('app').innerHTML=
+ '<section class="screen active" id="intro">'
+ +'<div class="brand"><span class="dot"></span>LOVE MODE · 亲密关系实验室</div>'
+ +'<div class="hero"><h1>你在恋爱里，<em>是哪种默认设置？</em></h1>'
+ +'<p class="lead">有些人一不安就想确认，有些人一靠近就想退。<strong>依恋类型</strong>决定了你在亲密关系里最本能的那套反应——它不决定你爱得对不对，但决定了你会怎么爱。</p>'
+ +'<div class="grid-preview">'+PREVIEW+'</div>'
+ +'<p class="grid-hint">24 道题，测出你的依恋象限、恋爱外显度与相处说明书</p></div>'
+ +'<div class="meta"><span>24 道题</span><i></i><span>约 4 分钟</span><i></i><span>8 种类型</span><i></i><span>完全免费</span></div>'
+ +'<button class="cta" onclick="startQuiz()">开始测试<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>'
+ +'<p class="foot-note">本测评依据依恋理论改编，仅供自我觉察与娱乐参考<br>不构成心理诊断或医疗建议</p>'
+ +'</section>'
+
+ +'<section class="screen" id="quiz"><div class="quiz-top">'
+ +'<button class="icon-btn" onclick="prevQuestion()" aria-label="上一题"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>'
+ +'<div class="progress-count"><b id="qCur">1</b> / <span id="qTotal">24</span></div>'
+ +'<button class="icon-btn" onclick="resetQuiz()" aria-label="回到首页"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg></button></div>'
+ +'<div class="prog-stage"><div class="bar-wrap"><div class="bar-fill" id="barFill"></div></div>'
+ +'<div class="walker idle" id="walker" aria-hidden="true"><div class="halo"></div><div class="avatar" id="walkerAvatar">'
+ +'<svg viewBox="0 0 48 58" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">'
+ +'<ellipse cx="24" cy="54" rx="10" ry="2.8" fill="currentColor" opacity=".15" stroke="none"/>'
+ +'<g class="figure">'
+ +'<g class="p-leg l"><path d="M22.8 35 L20.4 46.5" stroke-width="2.6"/><circle cx="20.4" cy="47.6" r="1.9" fill="currentColor" stroke="none"/></g>'
+ +'<g class="p-leg r"><path d="M25.2 35 L27.6 46.5" stroke-width="2.6"/><circle cx="27.6" cy="47.6" r="1.9" fill="currentColor" stroke="none"/></g>'
+ +'<path d="M24 22.5 L24 36" stroke-width="3.2"/>'
+ +'<g class="p-arm l"><path d="M23.4 24.5 L16.2 31.2" stroke-width="2.4"/><circle cx="15.5" cy="31.9" r="1.7" fill="currentColor" stroke="none"/></g>'
+ +'<g class="p-arm r"><path d="M24.6 24.5 L31.8 31.2" stroke-width="2.4"/><circle cx="32.5" cy="31.9" r="1.7" fill="currentColor" stroke="none"/></g>'
+ +'<circle cx="24" cy="13.6" r="7.4" fill="currentColor" stroke="none"/>'
+ +'<circle cx="21.1" cy="10.4" r="2.1" fill="#FFFFFF" opacity=".38" stroke="none"/>'
+ +'<circle cx="21.9" cy="13.4" r="1.05" fill="rgba(11,7,16,.82)" stroke="none"/>'
+ +'<circle cx="26.3" cy="13.4" r="1.05" fill="rgba(11,7,16,.82)" stroke="none"/>'
+ +'<path d="M22.3 16 Q24 17.3 25.7 16" stroke="rgba(11,7,16,.82)" stroke-width="1.1" fill="none"/>'
+ +'</g></svg>'
+ +'<span class="wmark empty" id="walkerMark"></span></div></div></div>'
+ +'<div class="q-index" id="qIndex">QUESTION 01</div><div class="q-title" id="qTitle"></div><div class="options" id="qOptions"></div>'
+ +'<div class="quiz-foot"><button class="prev-btn" id="prevBtn" onclick="prevQuestion()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>上一题</button></div></section>'
+
+ +'<section class="screen" id="analyzing"><div class="scan"><div class="sweep"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>'
+ +'<div class="core"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21c-5-3.6-8-6.6-8-10.2C4 8 6.2 6 8.8 6c1.7 0 2.9 1 3.2 2.1C12.3 7 13.5 6 15.2 6C17.8 6 20 8 20 10.8c0 3.6-3 6.6-8 10.2z"/></svg></div></div>'
+ +'<div class="scan-text" id="scanText">正在读取你的关系模式…</div><div class="scan-hint">分析 '+QUESTIONS.length+' 项依恋信号</div></section>'
+
+ +'<section class="screen" id="result">'
+ +'<div class="reveal-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21c-5-3.6-8-6.6-8-10.2C4 8 6.2 6 8.8 6c1.7 0 2.9 1 3.2 2.1C12.3 7 13.5 6 15.2 6C17.8 6 20 8 20 10.8c0 3.6-3 6.6-8 10.2z"/></svg>你的依恋类型</div>'
+ +'<div class="emblem-wrap"><div class="emblem" id="emblem" title="点一下看看它有没有反应"></div></div>'
+ +'<div class="type-name"><span class="type-sym" id="typeSym"></span><span id="typeName"></span></div><div class="type-alias" id="typeAlias"></div>'
+ +'<div class="tagline" id="tagline"></div><div class="family-note" id="familyNote"></div>'
+ +'<div class="bento">'
+ +'<div class="b-card span2"><div class="b-head">三维分布</div><div class="mrow" id="dimCards"></div><p class="dim-note">数值是相对位置：越高，这一维在你身上越突出（不是打分高低）。依恋焦虑与回避共同决定你的象限，情感外显决定你属于哪一种表现形态。</p></div>'
+ +'<div class="praise-card span2"><span class="pc-tag">你的闪光点</span><p id="praiseText"></p></div>'
+ +'<div class="b-card"><div class="b-head">关键数据</div><div class="bstats" id="statsBox"></div></div>'
+ +'<div class="b-card fam-card"><div class="b-head">同家族类型</div><div class="bfam" id="familyChips"></div></div>'
+ +'</div>'
+ +'<div class="b-card rel-card"><div class="b-head">关系搭配</div>'
+ +'<div class="hs-title"><span class="pair-dot"></span>契合类型<span class="pair-count" id="relGoodCount"></span></div><div class="hs" id="relGood"></div>'
+ +'<div class="hs-title t2"><span class="pair-dot red"></span>不契合类型<span class="pair-count" id="relBadCount"></span></div><div class="hs" id="relBad"></div>'
+ +'<p class="rel-note">契合不等于天生合适，不契合也不是不能在一起——它说的是「需要多费力」，而不是「有没有可能」。</p></div>'
+ +'<div id="accList"></div>'
+ +'<div class="result-actions">'
+ +'<button class="ghost-btn primary" onclick="savePoster()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg>保存结果海报</button>'
+ +'<button class="ghost-btn" onclick="resetQuiz()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>再测一次</button></div>'
+ +'<button class="copy-btn" onclick="copyShare()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="3"/><path d="M15 9V6a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h3"/></svg>复制分享文案</button>'
+ +'<p class="disclaimer">本测评基于依恋理论改编，仅供自我觉察与娱乐参考，不构成心理诊断、医疗建议或对任何人的判断。若亲密关系长期带来强烈痛苦，建议寻求专业心理咨询。全部内容免费开放，不设任何门槛。</p>'
+ +'</section>';
+
+document.getElementById('qTotal').textContent=QUESTIONS.length;
+
+var em=document.getElementById('emblem');
+em.addEventListener('click',function(){
+  em.classList.remove('tap'); void em.offsetWidth; em.classList.add('tap');
+  setTimeout(function(){ em.classList.remove('tap'); },800);
+});
+
+var g=document.getElementById('grain'), ghost='';
+for(var i=0;i<34;i++) ghost+='<i style="left:'+(Math.random()*100).toFixed(2)+'%;top:'+(Math.random()*100).toFixed(2)+'%;animation-delay:'+(Math.random()*4.6).toFixed(2)+'s;opacity:'+(0.15+Math.random()*0.5).toFixed(2)+'"></i>';
+g.innerHTML=ghost;
+
+/* ===================== 流程 ===================== */
+var answers=[], current=0, resultData=null, advanceTimer=null, lastLean=-1;
+
+function showScreen(id){
+  var all=document.querySelectorAll('.screen');
+  for(var i=0;i<all.length;i++) all[i].classList.remove('active');
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+  syncBgm();
+}
+function startQuiz(){ clearTimeout(advanceTimer); answers=[]; current=0; lastLean=-1; sfxClickPlay(); renderQuestion(); showScreen('quiz'); }
+function resetQuiz(){ clearTimeout(advanceTimer); answers=[]; current=0; lastLean=-1; showScreen('intro'); }
+function prevQuestion(){ clearTimeout(advanceTimer); if(current===0){ resetQuiz(); return; } sfxClickPlay(); current--; renderQuestion(); }
+
+/* 进度条 + 小人同步 */
+function setProgress(r){
+  var p=Math.max(0,Math.min(1,r))*100;
+  document.getElementById('barFill').style.width=p+'%';
+  document.getElementById('walker').style.left=p+'%';
+}
+
+/* 用已答的题估算当前倾向（按题目总数折算，避免答得少时偏斜） */
+function leanData(){
+  var cnt=0, s=[0,0,0];
+  for(var i=0;i<QUESTIONS.length;i++){
+    var a=answers[i];
+    if(a==null) continue;
+    cnt++;
+    var w=QUESTIONS[i].o[a].s;
+    for(var k=0;k<3;k++) s[k]+=w[k];
+  }
+  if(!cnt) return null;
+  var scale=QUESTIONS.length/cnt, n=[];
+  for(var k=0;k<3;k++) n.push(Math.max(0,Math.min(1,0.5+(s[k]*scale-DIM_MEAN[k])/(DIM_SPAN*DIM_SD[k]))));
+  var fam=n[1]<CUT_V?(n[0]<CUT_A?0:1):(n[0]<CUT_A?2:3);
+  var sub=n[2]>=CUT_E?0:1;
+  return {idx:fam*2+sub, fam:fam, cnt:cnt};
+}
+
+/* 小人：颜色随当前倾向过渡，类型符号角标同步 */
+function renderLean(){
+  var w=document.getElementById('walker'), mk=document.getElementById('walkerMark');
+  var L=leanData();
+  if(!L){
+    w.classList.add('idle'); w.style.removeProperty('--wc');
+    mk.className='wmark empty'; mk.innerHTML='';
+    lastLean=-1;
+    return;
+  }
+  var t=TYPES[L.idx], fam=FAMILIES[t.f];
+  w.classList.remove('idle');
+  w.style.setProperty('--wc',fam.color);
+  mk.className='wmark'; mk.innerHTML=markSVG(t.icon);
+  if(lastLean!==L.idx){
+    w.classList.remove('pop'); void w.offsetWidth; w.classList.add('pop');
+    lastLean=L.idx;
+  }
+}
+
+function renderQuestion(){
+  clearTimeout(advanceTimer);
+  var q=QUESTIONS[current];
+  document.getElementById('qCur').textContent=current+1;
+  document.getElementById('qIndex').textContent='QUESTION '+String(current+1).padStart(2,'0');
+  document.getElementById('qTitle').textContent=q.q;
+  document.getElementById('prevBtn').disabled=(current===0);
+  setProgress(current/QUESTIONS.length);
+  var box=document.getElementById('qOptions');
+  box.innerHTML='';
+  q.o.forEach(function(opt,idx){
+    var el=document.createElement('button');
+    el.className='opt'+(answers[current]===idx?' chosen':'');
+    el.innerHTML='<span class="radio"></span><span>'+opt.t+'</span>';
+    el.onclick=function(){ choose(idx,el); };
+    box.appendChild(el);
+  });
+  box.style.animation='none'; void box.offsetWidth;
+  box.style.animation='screenIn .38s cubic-bezier(.22,.9,.3,1)';
+  renderLean();
+}
+
+function choose(idx,el){
+  answers[current]=idx;
+  var opts=document.querySelectorAll('.opt');
+  for(var i=0;i<opts.length;i++) opts[i].classList.remove('chosen');
+  el.classList.add('chosen');
+  sfxClickPlay();
+  setProgress((current+1)/QUESTIONS.length);
+  renderLean();
+  clearTimeout(advanceTimer);
+  advanceTimer=setTimeout(function(){
+    if(current<QUESTIONS.length-1){ current++; renderQuestion(); }
+    else goAnalyze();
+  },250);
+}
+
+var SCAN_LINES=['正在读取你的关系模式…','比对焦虑与回避两条维度…','计算你的情感外显度…','匹配你的依恋类型…'];
+function goAnalyze(){
+  showScreen('analyzing');
+  sfxCompletePlay();
+  var txt=document.getElementById('scanText'), i=0;
+  txt.textContent=SCAN_LINES[0];
+  var timer=setInterval(function(){ i++; if(i<SCAN_LINES.length) txt.textContent=SCAN_LINES[i]; },520);
+  setTimeout(function(){
+    clearInterval(timer);
+    resultData=compute(answers);
+    renderResult();
+    showScreen('result');
+  },2100);
+}
+
+/* ===================== 结果渲染 ===================== */
+function pct(p){ return Math.max(1,Math.min(100,Math.round(p*100))); }
+function hexA(hex,a){
+  var h=hex.replace('#','');
+  return 'rgba('+parseInt(h.substr(0,2),16)+','+parseInt(h.substr(2,2),16)+','+parseInt(h.substr(4,2),16)+','+a+')';
+}
+
+/* ===== 手风琴折叠分区 ===== */
+var CHEV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5 12 15l6-5.5"/></svg>';
+function accIco(s){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+s+'</svg>'; }
+var ACC_ICONS={
+  rel:'<path d="M12 21c-5-3.6-8-6.6-8-10.2C4 8 6.2 6 8.8 6c1.7 0 2.9 1 3.2 2.1C12.3 7 13.5 6 15.2 6 17.8 6 20 8 20 10.8c0 3.6-3 6.6-8 10.2z"/>',
+  warn:'<path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M12 9v4M12 16.5v.5"/>',
+  act:'<path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 5.5l1 1 2-2M4 11.5l1 1 2-2M4 17.5l1 1 2-2"/>',
+  full:'<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h5M10 17h5"/>',
+  fam:'<rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/>'
+};
+function accSec(title,icon,inner,open){
+  return '<div class="acc'+(open?' open':'')+'"><div class="acc-h" onclick="accToggle(this)"><span class="acc-ico">'+accIco(icon)+'</span><b>'+title+'</b><span class="acc-arrow">'+CHEV+'</span></div><div class="acc-b"><div class="acc-in">'+inner+'</div></div></div>';
+}
+function accToggle(h){
+  var acc=h.parentNode, b=acc.querySelector('.acc-b');
+  var open=acc.classList.toggle('open');
+  b.style.maxHeight=open?(b.scrollHeight+'px'):'0px';
+}
+window.addEventListener('resize',function(){
+  var list=document.querySelectorAll('.acc.open .acc-b');
+  for(var i=0;i<list.length;i++) list[i].style.maxHeight=list[i].scrollHeight+'px';
+});
+
+function renderResult(){
+  var d=resultData, t=TYPES[d.idx], fam=FAMILIES[t.f];
+  var root=document.getElementById('result');
+  root.style.setProperty('--accent',fam.color);
+  root.style.setProperty('--accent-soft',hexA(fam.color,.14));
+  root.style.setProperty('--glow',hexA(fam.color,.26));
+
+  var e=document.getElementById('emblem');
+  e.innerHTML=emblemSVG(t);
+  e.classList.remove('enter'); void e.offsetWidth; e.classList.add('enter');
+
+  document.getElementById('typeSym').innerHTML=markSVG(t.icon);
+  document.getElementById('typeName').textContent=t.n;
+  document.getElementById('typeAlias').textContent='「'+t.a+'」';
+  document.getElementById('tagline').textContent='“'+t.t+'”';
+  document.getElementById('familyNote').textContent='属于 '+fam.name+' · '+fam.desc;
+
+  var dims=[['依恋焦虑',0],['依恋回避',1],['情感外显',2]];
+  var cards='';
+  dims.forEach(function(x){
+    var p=pct(d.p[x[1]]), tag=p>=62?'高':(p>=40?'中':'低');
+    cards+='<div class="mcard"><span class="mlab">'+x[0]+'</span><span class="mval">'+p+'%</span><span class="mtag'+(p>=62?' hi':'')+'">'+tag+'</span><span class="mbar"><i data-w="'+p+'"></i></span></div>';
+  });
+  document.getElementById('dimCards').innerHTML=cards;
+
+  document.getElementById('praiseText').textContent=t.praise;
+
+  var st='';
+  t.st.forEach(function(x){ st+='<div class="bstat"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>'; });
+  document.getElementById('statsBox').innerHTML=st;
+
+  var chips='';
+  for(var i=0;i<2;i++){
+    var ci=t.f*2+i, nf=TYPES[ci];
+    chips+='<span class="chip'+(nf.n===t.n?' on':'')+'" title="查看「'+nf.n+'」完整解析" onclick="openType('+ci+')">'+nf.n+'</span>';
+  }
+  chips+='<span class="fam-hint">点按任意类型查看完整解析</span>';
+  document.getElementById('familyChips').innerHTML=chips;
+
+  /* 关系搭配：契合 / 不契合 各 3 张卡片，全部完整展示 */
+  var pairCards=function(cls,list){
+    var html='';
+    list.forEach(function(o){
+      var ot=TYPES[o.i];
+      html+='<div class="hs-card '+cls+'" title="查看「'+ot.n+'」完整解析" onclick="openType('+o.i+')"><span class="hs-sym">'+markSVG(ot.icon)+'</span><b>'+ot.n+'</b><i>'+ot.a+'</i><p>'+o.w+'</p></div>';
+    });
+    return html;
+  };
+  document.getElementById('relGood').innerHTML=pairCards('good',BEST[d.idx]);
+  document.getElementById('relBad').innerHTML=pairCards('bad',WORST[d.idx]);
+  document.getElementById('relGoodCount').textContent=BEST[d.idx].length+' 种';
+  document.getElementById('relBadCount').textContent=WORST[d.idx].length+' 种';
+
+  /* 长久关系提醒：卡点 + 注意事项 + 容易犯的错 */
+  var warn='<p class="warn-intro">'+t.sec[2][1]+'</p>';
+  warn+='<div class="warn-sub">长期关系的 4 个注意事项</div><ul class="warn-list keep">';
+  NOTES[d.idx].forEach(function(n){ warn+='<li>'+n+'</li>'; });
+  warn+='</ul><div class="warn-sub risk">容易犯的 4 个错</div><ul class="warn-list risk">';
+  TRAPS[d.idx].forEach(function(n){ warn+='<li>'+n+'</li>'; });
+  warn+='</ul>';
+
+  /* 相处说明书：4 条可执行的动作 */
+  var act='<ul class="actions">';
+  t.act.forEach(function(a,i){ act+='<li><span class="act-n">'+(i+1)+'</span><span>'+a+'</span></li>'; });
+  act+='</ul>';
+
+  /* 完整解析：默认设置 / 模式来源 / 怎么调整 */
+  var content='';
+  [0,1,3].forEach(function(k){
+    content+='<div class="sec"><h3>'+t.sec[k][0]+'</h3><p>'+t.sec[k][1]+'</p></div>';
+  });
+
+  /* 长文本区：3 个手风琴，默认全部收起 */
+  document.getElementById('accList').innerHTML=
+    accSec('长久关系提醒',ACC_ICONS.warn,warn,false)
+    +accSec('相处说明书',ACC_ICONS.act,act,false)
+    +accSec('完整解析',ACC_ICONS.full,content,false);
+
+  requestAnimationFrame(function(){
+    var bars=document.querySelectorAll('.mbar i');
+    for(var i=0;i<bars.length;i++) bars[i].style.width=bars[i].dataset.w+'%';
+    var open=document.querySelector('#accList .acc.open .acc-b');
+    if(open) open.style.maxHeight=open.scrollHeight+'px';
+  });
+}
+
+function emblemSVG(t){
+  return '<svg viewBox="0 0 120 120" fill="none" stroke-linecap="round">'
+    +'<circle cx="60" cy="60" r="52" fill="none" stroke="currentColor" stroke-width="1" stroke-opacity=".14"/>'
+    +'<circle cx="60" cy="60" r="45" fill="none" stroke="currentColor" stroke-width="1.4" stroke-opacity=".26"/>'
+    +'<g class="'+t.anim+'">'+ICONS[t.icon]+'</g></svg>';
+}
+
+/* ===================== 结果海报 ===================== */
+/* 绘制指定类型的结果海报，绘制完成（含异步载入的徽章）后回调 done(canvas) */
+function buildPoster(idx, done){
+  var d={p:resultData?resultData.p:[0.5,0.5,0.5],idx:idx};
+  var t=TYPES[idx], fam=FAMILIES[t.f];
+  var W=1080,H=1440, c=document.createElement('canvas');
+  c.width=W; c.height=H;
+  var x=c.getContext('2d');
+
+  var g=x.createLinearGradient(0,0,W,H);
+  g.addColorStop(0,'#0B0710'); g.addColorStop(.5,'#150B19'); g.addColorStop(1,'#1D0F22');
+  x.fillStyle=g; x.fillRect(0,0,W,H);
+
+  var rg=x.createRadialGradient(W/2,H*0.32,0,W/2,H*0.32,620);
+  rg.addColorStop(0,hexA(fam.color,.30)); rg.addColorStop(1,'rgba(11,7,16,0)');
+  x.fillStyle=rg; x.fillRect(0,0,W,H);
+
+  x.strokeStyle='rgba(255,255,255,.09)'; x.lineWidth=2;
+  x.strokeRect(30,30,W-60,H-60);
+
+  x.textAlign='center';
+  x.fillStyle='rgba(255,255,255,.40)';
+  x.font='500 26px "PingFang SC","Microsoft YaHei",sans-serif';
+  x.fillText('依 恋 类 型 · 恋 爱 风 格 测 试',W/2,140);
+
+  x.fillStyle='#F7EDF6';
+  x.font='800 94px "PingFang SC","Microsoft YaHei",sans-serif';
+  x.fillText(t.n,W/2,700);
+
+  x.fillStyle=fam.color;
+  x.font='600 32px "PingFang SC","Microsoft YaHei",sans-serif';
+  x.fillText('「'+t.a+'」',W/2,752);
+
+  x.fillStyle='rgba(240,226,238,.9)';
+  x.font='400 36px "PingFang SC","Microsoft YaHei",sans-serif';
+  wrapText(x,'“'+t.t+'”',W/2,822,760,54);
+
+  var dims=[['依恋焦虑',0],['依恋回避',1],['情感外显',2]];
+  var bx=126, bw=W-252, by=940;
+  dims.forEach(function(dv,i){
+    var p=pct(d.p[dv[1]]), yy=by+i*62;
+    x.textAlign='left';
+    x.fillStyle='rgba(200,190,210,.85)';
+    x.font='500 24px "PingFang SC","Microsoft YaHei",sans-serif';
+    x.fillText(dv[0],bx,yy+8);
+    x.fillStyle='rgba(255,255,255,.10)';
+    x.fillRect(bx+128,yy,bw-210,12);
+    x.fillStyle=fam.color;
+    x.fillRect(bx+128,yy,(bw-210)*p/100,12);
+    x.textAlign='right';
+    x.fillStyle=fam.color;
+    x.font='600 24px "PingFang SC","Microsoft YaHei",sans-serif';
+    x.fillText(p+'%',W-126,yy+8);
+  });
+
+  /* 契合 / 不契合（各 3 种） */
+  var best=BEST[idx].map(function(o){ return TYPES[o.i].n; });
+  var worst=WORST[idx].map(function(o){ return TYPES[o.i].n; });
+  x.textAlign='center';
+  x.fillStyle='rgba(255,255,255,.42)';
+  x.font='500 22px "PingFang SC","Microsoft YaHei",sans-serif';
+  x.fillText('契合：'+best.join(' · '),W/2,1160);
+  x.fillText('不契合：'+worst.join(' · '),W/2,1198);
+
+  x.fillStyle='rgba(255,255,255,.28)';
+  x.font='400 24px "PingFang SC","Microsoft YaHei",sans-serif';
+  x.fillText('24 道题，看清你在亲密关系里的默认设置',W/2,H-118);
+  x.fillStyle='rgba(255,255,255,.52)';
+  x.font='600 26px "PingFang SC","Microsoft YaHei",sans-serif';
+  x.fillText('来测测你是哪一种',W/2,H-74);
+
+  var svg=emblemSVG(t).split('currentColor').join(fam.color)
+    .replace('<svg viewBox','<svg xmlns="http://www.w3.org/2000/svg" viewBox');
+  /* 海报里的徽章只取静态姿态，避免动画在导出时停在中间帧 */
+  svg=svg.replace(/class="[^"]*"/g,'');
+  var badge=new Image(), settled=false;
+  var finish=function(){
+    if(settled) return; settled=true;
+    done(c);
+  };
+  badge.onload=function(){ x.drawImage(badge,W/2-190,290,380,380); finish(); };
+  badge.onerror=finish;
+  badge.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  setTimeout(finish,800);
+}
+
+function savePoster(){
+  if(!resultData) return;
+  var idx=resultData.idx;
+  buildPoster(idx,function(c){
+    var a=document.createElement('a');
+    a.href=c.toDataURL('image/png');
+    a.download='依恋类型_'+TYPES[idx].n+'.png';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    toast('海报已生成，可保存分享');
+  });
+}
+
+function wrapText(ctx,text,cx,y,maxW,lineH){
+  ctx.textAlign='center';
+  var line='', lines=[];
+  for(var i=0;i<text.length;i++){
+    var ch=text[i];
+    if(ctx.measureText(line+ch).width>maxW){ lines.push(line); line=ch; }
+    else line+=ch;
+  }
+  if(line) lines.push(line);
+  lines.forEach(function(l,i){ ctx.fillText(l,cx,y+i*lineH); });
+}
+
+/* ===================== 分享文案 ===================== */
+function copyShare(){
+  if(!resultData) return;
+  var t=TYPES[resultData.idx];
+  var txt='我测出来是「'+t.n+'」（'+t.a+'）——'+t.t
+    +'\n依恋焦虑 '+pct(resultData.p[0])+'% · 依恋回避 '+pct(resultData.p[1])+'% · 情感外显 '+pct(resultData.p[2])+'%'
+    +'\n24 道题，看看你在亲密关系里的默认设置是哪一种。';
+  var done=function(){ toast('分享文案已复制'); };
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(done)['catch'](fallback);
+  }else fallback();
+  function fallback(){
+    var ta=document.createElement('textarea');
+    ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); done(); }catch(e){ toast('复制失败，请手动长按选择'); }
+    document.body.removeChild(ta);
+  }
+}
+var toastTimer=null;
+function toast(msg){
+  var el=document.getElementById('toast');
+  if(!el){
+    el=document.createElement('div');
+    el.id='toast';
+    el.style.cssText='position:fixed;left:50%;bottom:96px;transform:translateX(-50%);padding:11px 18px;border-radius:100px;background:rgba(30,16,34,.92);border:1px solid rgba(255,133,168,.4);color:#FFD8E3;font-size:13px;z-index:5;transition:opacity .3s';
+    document.body.appendChild(el);
+  }
+  el.textContent=msg; el.style.opacity='1';
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){ el.style.opacity='0'; },1600);
+}
+
+/* ===================== 类型详情弹窗 ===================== */
+/* 点击同家族类型 / 关系搭配卡片，弹出该类型的完整介绍 */
+function openType(i){
+  var t=TYPES[i], fam=FAMILIES[t.f];
+  var stats='';
+  t.st.forEach(function(x){ stats+='<div class="tm-stat"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>'; });
+  var secs='';
+  t.sec.forEach(function(s){ secs+='<div class="tm-sec"><h4>'+s[0]+'</h4><p>'+s[1]+'</p></div>'; });
+  var body=document.getElementById('typeModalBody');
+  body.style.setProperty('--tm-c',fam.color);
+  body.innerHTML=
+    '<div class="tm-head">'
+    +'<span class="tm-sym" style="color:'+fam.color+';background:'+hexA(fam.color,.14)+';border-color:'+hexA(fam.color,.4)+'">'+markSVG(t.icon)+'</span>'
+    +'<div><div class="tm-name" id="tmName">'+t.n+'</div><div class="tm-alias">「'+t.a+'」</div></div></div>'
+    +'<div class="tm-fam">'+fam.name+' · '+fam.desc+'</div>'
+    +'<p class="tm-tagline">'+t.t+'</p>'
+    +'<div class="tm-praise"><span>你的闪光点</span><p>'+t.praise+'</p></div>'
+    +'<div class="tm-stats">'+stats+'</div>'
+    +secs;
+  var ov=document.getElementById('typeModal');
+  ov.classList.add('show');
+  ov.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  ov.querySelector('.tm-panel').scrollTop=0;
+}
+function closeType(){
+  var ov=document.getElementById('typeModal');
+  if(!ov||!ov.classList.contains('show')) return;
+  ov.classList.remove('show');
+  ov.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeType(); });
+
+/* ===================== 音频：真实素材（点击音 / 完成音 / 双场景 BGM） ===================== */
+var A_DIR='audio/';
+var musicOn=false, bgmPending=false;
+var bgmAudio=null, bgmKey=null;
+/* BGM 片段：答题/首页 12~72s，结果页 8~68s（避开开头重起音，首尾平缓可循环） */
+var BGM_DEF={
+  quiz:{src:A_DIR+'bgm-quiz.mp3',start:12,end:72,vol:.5},
+  result:{src:A_DIR+'bgm-result.mp3',start:8,end:68,vol:.42}
+};
+var sfxClick=null, sfxComplete=null;
+
+function initSfx(){
+  if(sfxClick) return;
+  sfxClick=new Audio(A_DIR+'click.mp3'); sfxClick.preload='auto';
+  sfxComplete=new Audio(A_DIR+'complete.mp3'); sfxComplete.preload='auto';
+}
+function playSfx(a,vol){
+  if(!a) return;
+  try{
+    a.pause(); a.currentTime=0; a.volume=vol;
+    var p=a.play(); if(p&&p.catch) p.catch(function(){});
+  }catch(e){}
+}
+function sfxClickPlay(){ initSfx(); playSfx(sfxClick,0.4); }
+function sfxCompletePlay(){ initSfx(); playSfx(sfxComplete,0.35); }
+
+/* 音量渐变（HTMLAudioElement 无原生渐变，用定时器插值） */
+function fadeTo(a,target,ms,done){
+  if(!a) return;
+  if(a._ft){ clearInterval(a._ft); a._ft=null; }
+  var from=a.volume, t0=Date.now();
+  if(!ms||ms<=0){ a.volume=target; if(done) done(); return; }
+  a._ft=setInterval(function(){
+    var k=Math.min(1,(Date.now()-t0)/ms);
+    a.volume=Math.max(0,Math.min(1,from+(target-from)*k));
+    if(k>=1){ clearInterval(a._ft); a._ft=null; if(done) done(); }
+  },40);
+}
+function ensureBgm(key){
+  if(bgmAudio&&bgmKey===key) return bgmAudio;
+  var d=BGM_DEF[key];
+  var a=new Audio(d.src);
+  a.preload='auto'; a.loop=false; a.volume=0;
+  a.addEventListener('loadedmetadata',function(){
+    if(!a._seeded){ a._seeded=true; try{ a.currentTime=d.start; }catch(e){} }
+  });
+  a.addEventListener('timeupdate',function(){
+    if(a.currentTime>=d.end-0.05){ try{ a.currentTime=d.start; }catch(e){} }
+  });
+  bgmAudio=a; bgmKey=key;
+  return a;
+}
+function playBgm(key){
+  if(!musicOn) return;
+  if(bgmKey!==key&&bgmAudio){
+    var old=bgmAudio;
+    fadeTo(old,0,600,function(){ try{ old.pause(); }catch(e){} });
+    bgmAudio=null; bgmKey=null;
+  }
+  var a=ensureBgm(key), d=BGM_DEF[key];
+  /* 等元数据就绪再定位到片段起点播放，避免先播开头再跳到 12s 的突兀感 */
+  var begin=function(){
+    try{
+      if(a.paused){
+        if(a.currentTime<d.start||a.currentTime>=d.end) a.currentTime=d.start;
+        var p=a.play(); if(p&&p.catch) p.catch(function(){});
+      }
+    }catch(e){}
+    fadeTo(a,d.vol,900);
+  };
+  if(a.readyState>=1) begin();
+  else a.addEventListener('loadedmetadata',function h(){
+    a.removeEventListener('loadedmetadata',h);
+    if(musicOn&&a===bgmAudio) begin();
+  });
+}
+function stopBgm(){
+  if(!bgmAudio) return;
+  var a=bgmAudio;
+  fadeTo(a,0,700,function(){ try{ a.pause(); }catch(e){} });
+}
+/* 结果页用 daydreamer，其余（首页/答题/分析中）用 soft piano */
+function currentBgmKey(){
+  var r=document.getElementById('result');
+  return (r&&r.classList.contains('active'))?'result':'quiz';
+}
+function syncBgm(){
+  if(!musicOn) return;
+  var key=currentBgmKey();
+  if(bgmKey===key&&bgmAudio&&!bgmAudio.paused) return;
+  playBgm(key);
+}
+function toggleMusic(){
+  musicOn=!musicOn;
+  setMusicBtn(musicOn);
+  try{ localStorage.setItem('att_music',musicOn?'1':'0'); }catch(e){}
+  if(musicOn) playBgm(currentBgmKey());
+  else stopBgm();
+}
+
+function setMusicBtn(on){
+  var b=document.getElementById('musicBtn');
+  b.classList.toggle('on',on);
+  b.setAttribute('aria-pressed',on?'true':'false');
+  b.title='背景音乐：'+(on?'开启':'关闭');
+}
+
+/* 恢复上次的音乐开关状态；受浏览器自动播放限制，需等首次用户手势再启动 */
+(function(){
+  try{
+    if(localStorage.getItem('att_music')==='1'){
+      musicOn=true; setMusicBtn(true); bgmPending=true;
+    }
+  }catch(e){}
+  document.addEventListener('pointerdown',function once(){
+    if(bgmPending){ bgmPending=false; playBgm(currentBgmKey()); }
+    document.removeEventListener('pointerdown',once);
+  },{passive:true});
+})();
+</script>
+</body>
+</html>
